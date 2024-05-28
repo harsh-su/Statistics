@@ -1406,7 +1406,7 @@ endclassdef
 %! obj = fitcknn (x, y, 'NumNeighbors', 5, 'Distance', 'mahalanobis', 'Cov', covMatrix);
 %!test
 %! CVMdl = crossval(obj);
-%! assert(class (CVMdl) , "ClassificationKNN") 
+%! assert(class (CVMdl) , "ClassificationPartitionedModel") 
 %! assert(CVMdl.ModelParameters.NumNeighbors == 5)
 %! assert(strcmp(CVMdl.ModelParameters.Distance, "mahalanobis"))
 %! assert(class(CVMdl.Trained{1}), "ClassificationKNN")
