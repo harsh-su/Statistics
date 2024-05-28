@@ -1,0 +1,37 @@
+load fisheriris
+x = meas;
+y = species;
+xc = [min(x); mean(x); max(x)];
+
+covMatrix = cov(x);
+
+% Define the class names
+classNames = unique(y);
+
+% Fit the k-NN model using the 'mahalanobis' distance and the custom covariance matrix,
+% and specify the class names
+obj = fitcknn(x, y, ...
+              'NumNeighbors', 5, ...
+              'Distance', 'mahalanobis', ...
+              'Cov', covMatrix, ...
+              'ClassNames', classNames);
+
+% Display the fitted model
+disp(obj)
+
+
+
+## is the classnames working ?
+## Handle class names
+if isempty(ClassNames)
+    ClassNames = gnY;
+else
+    ru = false(size(Y));
+    for i = 1:numel(ClassNames)
+        ac = strcmp(gnY, ClassNames{i});
+        ru = ru | ac;
+    endfor
+    X = X(ru, :);  # Use logical indexing with matrix X
+    Y = Y(ru);     # Use logical indexing with vector Y
+    gY = gY(ru);   # Use logical indexing with vector gY
+endif

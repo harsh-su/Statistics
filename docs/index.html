@@ -1,0 +1,3834 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Statistics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <script type="text/javascript">
+      window.addEventListener("load", () => {
+        for (let i of document.querySelectorAll(".collapse ul")) {
+          let tog = document.createElement("div");
+          tog.innerHTML = i.previousSibling.textContent;
+          tog.className = "toggle";
+          tog.onclick = () => tog.classList.toggle("show");
+          i.parentElement.removeChild(i.previousSibling);
+          i.parentElement.insertBefore(tog, i);
+        }
+      });
+    </script>
+    <style>
+    h6:hover {
+      color: gray;
+    }
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    [id^="togList"],                        /* HIDE CHECKBOX */
+    [id^="togList"] ~ .list,                /* HIDE LIST */
+    [id^="togList"] + label  span + span,   /* HIDE "Collapse" */
+    [id^="togList"]:checked + label span{   /* HIDE "Expand" (IF CHECKED) */
+      display:none;
+    }
+    [id^="togList"]:checked + label span + span{
+      display:inline-block;                 /* SHOW "Collapse" (IF CHECKED) */
+    }
+    [id^="togList"]:checked ~ .list{
+      display:block;                        /* SHOW LIST (IF CHECKED) */
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=https://gnu-octave.github.io/packages/statistics>
+              <img src="assets/statistics.png" alt="statistics" class="d-inline-block align-top" width="25" height="25">
+              Statistics
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-2 mb-2 mb-sm-0">
+              <img src="assets/statistics.png" class="d-block m-auto" alt="statistics">
+            </div>
+            <div class="col-sm-9 col-md-10">
+              <h3 class="d-inline-block mr-2">statistics</h3>
+              <b>1.6.6&nbsp;2024-5-16</b>
+              <p class="indent">
+                The Statistics package for GNU Octave.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+           <p>Select Category:
+             <select name="cat" onchange="location = this.options[this.selectedIndex].value;">
+             <option value="#Clustering">Clustering</option>
+             <option value="#Classification Classes">Classification Classes</option>
+             <option value="#Clustering Classes">Clustering Classes</option>
+             <option value="#CVpartition">CVpartition</option>
+             <option value="#Regression Classes">Regression Classes</option>
+             <option value="#Data Manipulation">Data Manipulation</option>
+             <option value="#Descriptive Statistics">Descriptive Statistics</option>
+             <option value="#Distribution Classes">Distribution Classes</option>
+             <option value="#Distribution Fitting">Distribution Fitting</option>
+             <option value="#Distribution Functions">Distribution Functions</option>
+             <option value="#Distribution Statistics">Distribution Statistics</option>
+             <option value="#Distribution Wrappers">Distribution Wrappers</option>
+             <option value="#Experimental Design">Experimental Design</option>
+             <option value="#Machine Learning">Machine Learning</option>
+             <option value="#Model Fitting">Model Fitting</option>
+             <option value="#Hypothesis Testing">Hypothesis Testing</option>
+             <option value="#I/O">I/O</option>
+             <option value="#Plotting">Plotting</option>
+             <option value="#Regression">Regression</option>
+             <option value="#Transforms">Transforms</option>
+             </select>
+           <p>
+
+           <h3 class="category">
+             <a name="Clustering">Clustering</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="cluster.html">cluster</a>
+                   </code></b>
+                 </td>
+                 <td>Define clusters from an agglomerative hierarchical cluster tree.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="clusterdata.html">clusterdata</a>
+                   </code></b>
+                 </td>
+                 <td>Wrapper function for 'linkage' and 'cluster'.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="cmdscale.html">cmdscale</a>
+                   </code></b>
+                 </td>
+                 <td>Classical multidimensional scaling of a matrix.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="confusionmat.html">confusionmat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute a confusion matrix for classification problems</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="cophenet.html">cophenet</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the cophenetic correlation coefficient.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="crossval.html">crossval</a>
+                   </code></b>
+                 </td>
+                 <td>Perform cross validation on given data.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="editDistance.html">editDistance</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the edit (Levenshtein) distance between strings or documents.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="evalclusters.html">evalclusters</a>
+                   </code></b>
+                 </td>
+                 <td>Create a clustering evaluation object to find the optimal number of
+clusters.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="inconsistent.html">inconsistent</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the inconsistency coefficient for each link of a hierarchical
+cluster tree.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="kmeans.html">kmeans</a>
+                   </code></b>
+                 </td>
+                 <td>Perform a K-means clustering of the NxD matrix DATA.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="knnsearch.html">knnsearch</a>
+                   </code></b>
+                 </td>
+                 <td>Find k-nearest neighbors from input data.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="linkage.html">linkage</a>
+                   </code></b>
+                 </td>
+                 <td>Produce a hierarchical clustering dendrogram.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mahal.html">mahal</a>
+                   </code></b>
+                 </td>
+                 <td>Mahalanobis' D-square distance.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mhsample.html">mhsample</a>
+                   </code></b>
+                 </td>
+                 <td>Draws NSAMPLES samples from a target stationary distribution PDF using
+Metropolis-Hastings algorithm.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="optimalleaforder.html">optimalleaforder</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the optimal leaf ordering of a hierarchical binary cluster tree.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="pdist.html">pdist</a>
+                   </code></b>
+                 </td>
+                 <td>Return the distance between any two rows in X.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="pdist2.html">pdist2</a>
+                   </code></b>
+                 </td>
+                 <td>Compute pairwise distance between two sets of vectors.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="procrustes.html">procrustes</a>
+                   </code></b>
+                 </td>
+                 <td>Procrustes Analysis.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="rangesearch.html">rangesearch</a>
+                   </code></b>
+                 </td>
+                 <td>Find all neighbors within specified distance from input data.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="slicesample.html">slicesample</a>
+                   </code></b>
+                 </td>
+                 <td>Draws NSAMPLES samples from a target stationary distribution PDF using
+slice sampling of Radford M.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="squareform.html">squareform</a>
+                   </code></b>
+                 </td>
+                 <td>Interchange between distance matrix and distance vector formats.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Classification Classes">Classification Classes</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ClassificationKNN.html">ClassificationKNN</a>
+                   </code></b>
+                 </td>
+                 <td>Create a ClassificationKNN class object containing a k-Nearest Neighbor
+classification model.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ConfusionMatrixChart.html">ConfusionMatrixChart</a>
+                   </code></b>
+                 </td>
+                 <td>Create object CMC, a Confusion Matrix Chart object.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Clustering Classes">Clustering Classes</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="CalinskiHarabaszEvaluation.html">CalinskiHarabaszEvaluation</a>
+                   </code></b>
+                 </td>
+                 <td>A Calinski-Harabasz object to evaluate clustering solutions.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ClusterCriterion.html">ClusterCriterion</a>
+                   </code></b>
+                 </td>
+                 <td>A clustering evaluation object as created by 'evalclusters'.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="DaviesBouldinEvaluation.html">DaviesBouldinEvaluation</a>
+                   </code></b>
+                 </td>
+                 <td>A Davies-Bouldin object to evaluate clustering solutions.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="GapEvaluation.html">GapEvaluation</a>
+                   </code></b>
+                 </td>
+                 <td>A gap object to evaluate clustering solutions.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="SilhouetteEvaluation.html">SilhouetteEvaluation</a>
+                   </code></b>
+                 </td>
+                 <td>A silhouette object to evaluate clustering solutions.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="CVpartition">CVpartition</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="@cvpartition_cvpartition.html">@cvpartition/cvpartition</a>
+                   </code></b>
+                 </td>
+                 <td>Create a partition object for cross validation.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="@cvpartition_display.html">@cvpartition/display</a>
+                   </code></b>
+                 </td>
+                 <td>Display a 'cvpartition' object, C.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="@cvpartition_get.html">@cvpartition/get</a>
+                   </code></b>
+                 </td>
+                 <td>Get a field, F, from a 'cvpartition' object, C.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="@cvpartition_repartition.html">@cvpartition/repartition</a>
+                   </code></b>
+                 </td>
+                 <td>Return a new cvpartition object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="@cvpartition_set.html">@cvpartition/set</a>
+                   </code></b>
+                 </td>
+                 <td>Set FIELD, in a 'cvpartition' object, C.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="@cvpartition_test.html">@cvpartition/test</a>
+                   </code></b>
+                 </td>
+                 <td>Return logical vector for testing-subset indices from a 'cvpartition'
+object, C.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="@cvpartition_training.html">@cvpartition/training</a>
+                   </code></b>
+                 </td>
+                 <td>Return logical vector for training-subset indices from a 'cvpartition'
+object, C.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Regression Classes">Regression Classes</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="RegressionGAM.html">RegressionGAM</a>
+                   </code></b>
+                 </td>
+                 <td>Create a RegressionGAM class object containing a Generalised Additive
+Model (GAM) for regression.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Data Manipulation">Data Manipulation</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="combnk.html">combnk</a>
+                   </code></b>
+                 </td>
+                 <td>Return all combinations of K elements in DATA.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="crosstab.html">crosstab</a>
+                   </code></b>
+                 </td>
+                 <td>Create a cross-tabulation (contingency table) T from data vectors.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="datasample.html">datasample</a>
+                   </code></b>
+                 </td>
+                 <td>Randomly sample data.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="fillmissing.html">fillmissing</a>
+                   </code></b>
+                 </td>
+                 <td>Replace missing entries of array A either with values in V or as
+determined by other specified methods.  'missing' values are determined
+by the data type of A as identified by the function ismissing, curently
+defined as:</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="grp2idx.html">grp2idx</a>
+                   </code></b>
+                 </td>
+                 <td>Get index for group variables.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ismissing.html">ismissing</a>
+                   </code></b>
+                 </td>
+                 <td>Find missing data in a numeric or string array.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="isoutlier.html">isoutlier</a>
+                   </code></b>
+                 </td>
+                 <td>Find outliers in data</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="normalise_distribution.html">normalise_distribution</a>
+                   </code></b>
+                 </td>
+                 <td>Transform a set of data so as to be N(0,1) distributed according to an
+idea by van Albada and Robinson.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="rmmissing.html">rmmissing</a>
+                   </code></b>
+                 </td>
+                 <td>Remove missing or incomplete data from an array.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="standardizeMissing.html">standardizeMissing</a>
+                   </code></b>
+                 </td>
+                 <td>Replace data values specified by INDICATOR in A by the standard
+'missing' data value for that data type.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tabulate.html">tabulate</a>
+                   </code></b>
+                 </td>
+                 <td>Calculate a frequency table.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Descriptive Statistics">Descriptive Statistics</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="cdfcalc.html">cdfcalc</a>
+                   </code></b>
+                 </td>
+                 <td>Calculate an empirical cumulative distribution function.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="cl_multinom.html">cl_multinom</a>
+                   </code></b>
+                 </td>
+                 <td>Confidence level of multinomial portions.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="geomean.html">geomean</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the geometric mean of X.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="grpstats.html">grpstats</a>
+                   </code></b>
+                 </td>
+                 <td>Summary statistics by group.  'grpstats' computes groupwise summary
+statistics, for data in a matrix X.  'grpstats' treats NaNs as missing
+values, and removes them.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="harmmean.html">harmmean</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the harmonic mean of X.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="jackknife.html">jackknife</a>
+                   </code></b>
+                 </td>
+                 <td>Compute jackknife estimates of a parameter taking one or more given
+samples as parameters.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mad.html">mad</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the mean or median absolute deviation (MAD) of the elements of
+X.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mean.html">mean</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the mean of the elements of X.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="median.html">median</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the median value of the elements of X.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nanmax.html">nanmax</a>
+                   </code></b>
+                 </td>
+                 <td>Find the maximal element while ignoring NaN values.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nanmin.html">nanmin</a>
+                   </code></b>
+                 </td>
+                 <td>Find the minimal element while ignoring NaN values.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nansum.html">nansum</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the sum while ignoring NaN values.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="std.html">std</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the standard deviation of the elements of the vector X.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="trimmean.html">trimmean</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the trimmed mean.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="var.html">var</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the variance of the elements of the vector X.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Distribution Classes">Distribution Classes</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="BetaDistribution.html">BetaDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Beta probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="BinomialDistribution.html">BinomialDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Binomial probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="BirnbaumSaundersDistribution.html">BirnbaumSaundersDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Gamma probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="BurrDistribution.html">BurrDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Burr probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ExponentialDistribution.html">ExponentialDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Exponential probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ExtremeValueDistribution.html">ExtremeValueDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Extreme value probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="GammaDistribution.html">GammaDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Gamma probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="GeneralizedExtremeValueDistribution.html">GeneralizedExtremeValueDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Generalized extreme value probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="GeneralizedParetoDistribution.html">GeneralizedParetoDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Generalized Pareto probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="HalfNormalDistribution.html">HalfNormalDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Half-normal probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="InverseGaussianDistribution.html">InverseGaussianDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Logistic probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="LogisticDistribution.html">LogisticDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Logistic probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="LoglogisticDistribution.html">LoglogisticDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Loglogistic probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="LognormalDistribution.html">LognormalDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Lognormal probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="LoguniformDistribution.html">LoguniformDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Log-uniform probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="MultinomialDistribution.html">MultinomialDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Multinomial probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="NakagamiDistribution.html">NakagamiDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Normal probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="NegativeBinomialDistribution.html">NegativeBinomialDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Negative binomial probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="NormalDistribution.html">NormalDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Normal probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="PiecewiseLinearDistribution.html">PiecewiseLinearDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Piecewise linear probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="PoissonDistribution.html">PoissonDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Poisson probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="RayleighDistribution.html">RayleighDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Rayleigh probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="RicianDistribution.html">RicianDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Rician probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tLocationScaleDistribution.html">tLocationScaleDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Weibull probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="TriangularDistribution.html">TriangularDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Triangular probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="UniformDistribution.html">UniformDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Continuous uniform probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="WeibullDistribution.html">WeibullDistribution</a>
+                   </code></b>
+                 </td>
+                 <td>Weibull probability distribution object.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Distribution Fitting">Distribution Fitting</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="betafit.html">betafit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameters and confidence intervals for the Beta distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="betalike.html">betalike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the Beta distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="binofit.html">binofit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameter and confidence intervals for the binomial
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="binolike.html">binolike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the binomial distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="bisafit.html">bisafit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate mean and confidence intervals for the Birnbaum-Saunders
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="bisalike.html">bisalike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the Birnbaum-Saunders distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="burrfit.html">burrfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate mean and confidence intervals for the Burr type XII
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="burrlike.html">burrlike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the Burr type XII distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="evfit.html">evfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameters and confidence intervals for the extreme value
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="evlike.html">evlike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the extreme value distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="expfit.html">expfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate mean and confidence intervals for the exponential distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="explike.html">explike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the exponential distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gamfit.html">gamfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameters and confidence intervals for the Gamma distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gamlike.html">gamlike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the Gamma distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="geofit.html">geofit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameter and confidence intervals for the geometric
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gevfit_lmom.html">gevfit_lmom</a>
+                   </code></b>
+                 </td>
+                 <td>Find an estimator (PARAMHAT) of the generalized extreme value (GEV)
+distribution fitting DATA using the method of L-moments.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gevfit.html">gevfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameters and confidence intervals for the generalized extreme
+value (GEV) distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gevlike.html">gevlike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the generalized extreme value (GEV)
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gpfit.html">gpfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameters and confidence intervals for the generalized Pareto
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gplike.html">gplike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the generalized Pareto distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gumbelfit.html">gumbelfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameters and confidence intervals for Gumbel distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gumbellike.html">gumbellike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the extreme value distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hnfit.html">hnfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameters and confidence intervals for the half-normal
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hnlike.html">hnlike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the half-normal distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="invgfit.html">invgfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate mean and confidence intervals for the inverse Gaussian
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="invglike.html">invglike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the inverse Gaussian distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="logifit.html">logifit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate mean and confidence intervals for the logistic distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="logilike.html">logilike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the logistic distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="loglfit.html">loglfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate mean and confidence intervals for the log-logistic
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="logllike.html">logllike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the log-logistic distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="lognfit.html">lognfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameters and confidence intervals for the lognormal
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="lognlike.html">lognlike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the lognormal distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nakafit.html">nakafit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate mean and confidence intervals for the Nakagami distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nakalike.html">nakalike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the Nakagami distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nbinfit.html">nbinfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameter and confidence intervals for the negative binomial
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nbinlike.html">nbinlike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the negative binomial distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="normfit.html">normfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameters and confidence intervals for the normal
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="normlike.html">normlike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the normal distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="poissfit.html">poissfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameter and confidence intervals for the Poisson
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="poisslike.html">poisslike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the Poisson distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="raylfit.html">raylfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameter and confidence intervals for the Rayleigh
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="rayllike.html">rayllike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the Rayleigh distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ricefit.html">ricefit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameters and confidence intervals for the Gamma distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ricelike.html">ricelike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the Rician distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tlsfit.html">tlsfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameters and confidence intervals for the Location-scale
+Student's T distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tlslike.html">tlslike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the location-scale Student's T distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="unidfit.html">unidfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameter and confidence intervals for the discrete uniform
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="unifit.html">unifit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameter and confidence intervals for the continuous uniform
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="wblfit.html">wblfit</a>
+                   </code></b>
+                 </td>
+                 <td>Estimate parameters and confidence intervals for the Weibull
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="wbllike.html">wbllike</a>
+                   </code></b>
+                 </td>
+                 <td>Negative log-likelihood for the Weibull distribution.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Distribution Functions">Distribution Functions</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="betacdf.html">betacdf</a>
+                   </code></b>
+                 </td>
+                 <td>Beta cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="betainv.html">betainv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the Beta distribution (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="betapdf.html">betapdf</a>
+                   </code></b>
+                 </td>
+                 <td>Beta probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="betarnd.html">betarnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the Beta distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="binocdf.html">binocdf</a>
+                   </code></b>
+                 </td>
+                 <td>Binomial cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="binoinv.html">binoinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the Binomial cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="binopdf.html">binopdf</a>
+                   </code></b>
+                 </td>
+                 <td>Binomial probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="binornd.html">binornd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the Binomial distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="bisacdf.html">bisacdf</a>
+                   </code></b>
+                 </td>
+                 <td>Birnbaum-Saunders cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="bisainv.html">bisainv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the Birnbaum-Saunders cumulative distribution function
+(iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="bisapdf.html">bisapdf</a>
+                   </code></b>
+                 </td>
+                 <td>Birnbaum-Saunders probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="bisarnd.html">bisarnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the Birnbaum-Saunders distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="burrcdf.html">burrcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Burr type XII cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="burrinv.html">burrinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the Burr type XII cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="burrpdf.html">burrpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Burr type XII probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="burrrnd.html">burrrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the Burr type XII distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="bvncdf.html">bvncdf</a>
+                   </code></b>
+                 </td>
+                 <td>Bivariate normal cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="bvtcdf.html">bvtcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Bivariate Student's t cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="cauchycdf.html">cauchycdf</a>
+                   </code></b>
+                 </td>
+                 <td>Cauchy cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="cauchyinv.html">cauchyinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the Cauchy cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="cauchypdf.html">cauchypdf</a>
+                   </code></b>
+                 </td>
+                 <td>Cauchy probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="cauchyrnd.html">cauchyrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the Cauchy distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="chi2cdf.html">chi2cdf</a>
+                   </code></b>
+                 </td>
+                 <td>Chi-squared cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="chi2inv.html">chi2inv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the chi-squared cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="chi2pdf.html">chi2pdf</a>
+                   </code></b>
+                 </td>
+                 <td>Chi-squared probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="chi2rnd.html">chi2rnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the chi-squared distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="copulacdf.html">copulacdf</a>
+                   </code></b>
+                 </td>
+                 <td>Copula family cumulative distribution functions (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="copulapdf.html">copulapdf</a>
+                   </code></b>
+                 </td>
+                 <td>Copula family probability density functions (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="copularnd.html">copularnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the copula family distributions.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="evcdf.html">evcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Extreme value cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="evinv.html">evinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the extreme value cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="evpdf.html">evpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Extreme value probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="evrnd.html">evrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the extreme value distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="expcdf.html">expcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Exponential cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="expinv.html">expinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the exponential cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="exppdf.html">exppdf</a>
+                   </code></b>
+                 </td>
+                 <td>Exponential probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="exprnd.html">exprnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the exponential distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="fcdf.html">fcdf</a>
+                   </code></b>
+                 </td>
+                 <td>F-cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="finv.html">finv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the F-cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="fpdf.html">fpdf</a>
+                   </code></b>
+                 </td>
+                 <td>F-probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="frnd.html">frnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the F-distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gamcdf.html">gamcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Gamma cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gaminv.html">gaminv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the Gamma cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gampdf.html">gampdf</a>
+                   </code></b>
+                 </td>
+                 <td>Gamma probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gamrnd.html">gamrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the Gamma distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="geocdf.html">geocdf</a>
+                   </code></b>
+                 </td>
+                 <td>Geometric cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="geoinv.html">geoinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the geometric cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="geopdf.html">geopdf</a>
+                   </code></b>
+                 </td>
+                 <td>Geometric probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="geornd.html">geornd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the geometric distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gevcdf.html">gevcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Generalized extreme value (GEV) cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gevinv.html">gevinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the generalized extreme value (GEV) cumulative distribution
+function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gevpdf.html">gevpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Generalized extreme value (GEV) probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gevrnd.html">gevrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the generalized extreme value (GEV) distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gpcdf.html">gpcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Generalized Pareto cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gpinv.html">gpinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the generalized Pareto cumulative distribution function
+(iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gppdf.html">gppdf</a>
+                   </code></b>
+                 </td>
+                 <td>Generalized Pareto probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gprnd.html">gprnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the generalized Pareto distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gumbelcdf.html">gumbelcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Gumbel cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gumbelinv.html">gumbelinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the Gumbel cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gumbelpdf.html">gumbelpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Gumbel probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gumbelrnd.html">gumbelrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the Gumbel distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hncdf.html">hncdf</a>
+                   </code></b>
+                 </td>
+                 <td>Half-normal cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hninv.html">hninv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the half-normal cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hnpdf.html">hnpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Half-normal probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hnrnd.html">hnrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the half-normal distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hygecdf.html">hygecdf</a>
+                   </code></b>
+                 </td>
+                 <td>Hypergeometric cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hygeinv.html">hygeinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the hypergeometric cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hygepdf.html">hygepdf</a>
+                   </code></b>
+                 </td>
+                 <td>Hypergeometric probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hygernd.html">hygernd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the hypergeometric distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="invgcdf.html">invgcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse Gaussian cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="invginv.html">invginv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the inverse Gaussian cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="invgpdf.html">invgpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse Gaussian probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="invgrnd.html">invgrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the inverse Gaussian distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="iwishpdf.html">iwishpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the probability density function of the inverse Wishart
+distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="iwishrnd.html">iwishrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Return a random matrix sampled from the inverse Wishart distribution
+with given parameters.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="jsucdf.html">jsucdf</a>
+                   </code></b>
+                 </td>
+                 <td>Johnson SU cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="jsupdf.html">jsupdf</a>
+                   </code></b>
+                 </td>
+                 <td>Johnson SU probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="laplacecdf.html">laplacecdf</a>
+                   </code></b>
+                 </td>
+                 <td>Laplace cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="laplaceinv.html">laplaceinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the Laplace cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="laplacepdf.html">laplacepdf</a>
+                   </code></b>
+                 </td>
+                 <td>Laplace probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="laplacernd.html">laplacernd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the Laplace distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="logicdf.html">logicdf</a>
+                   </code></b>
+                 </td>
+                 <td>Logistic cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="logiinv.html">logiinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the logistic cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="logipdf.html">logipdf</a>
+                   </code></b>
+                 </td>
+                 <td>Logistic probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="logirnd.html">logirnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the logistic distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="loglcdf.html">loglcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Loglogistic cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="loglinv.html">loglinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the log-logistic cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="loglpdf.html">loglpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Loglogistic probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="loglrnd.html">loglrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the loglogistic distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="logncdf.html">logncdf</a>
+                   </code></b>
+                 </td>
+                 <td>Lognormal cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="logninv.html">logninv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the lognormal cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="lognpdf.html">lognpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Lognormal probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="lognrnd.html">lognrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the lognormal distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mnpdf.html">mnpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Multinomial probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mnrnd.html">mnrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the multinomial distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mvncdf.html">mvncdf</a>
+                   </code></b>
+                 </td>
+                 <td>Multivariate normal cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mvnpdf.html">mvnpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Multivariate normal probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mvnrnd.html">mvnrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random vectors from the multivariate normal distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mvtcdf.html">mvtcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Multivariate Student's t cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mvtpdf.html">mvtpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Multivariate Student's t probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mvtrnd.html">mvtrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random vectors from the multivariate Student's t distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mvtcdfqmc.html">mvtcdfqmc</a>
+                   </code></b>
+                 </td>
+                 <td>Quasi-Monte-Carlo computation of the multivariate Student's T CDF.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nakacdf.html">nakacdf</a>
+                   </code></b>
+                 </td>
+                 <td>Nakagami cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nakainv.html">nakainv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the Nakagami cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nakapdf.html">nakapdf</a>
+                   </code></b>
+                 </td>
+                 <td>Nakagami probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nakarnd.html">nakarnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the Nakagami distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nbincdf.html">nbincdf</a>
+                   </code></b>
+                 </td>
+                 <td>Negative binomial cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nbininv.html">nbininv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the negative binomial cumulative distribution function
+(iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nbinpdf.html">nbinpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Negative binomial probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nbinrnd.html">nbinrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the negative binomial distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ncfcdf.html">ncfcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Noncentral F-cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ncfinv.html">ncfinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the noncentral F-cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ncfpdf.html">ncfpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Noncentral F-probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ncfrnd.html">ncfrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the noncentral F-distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nctcdf.html">nctcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Noncentral t-cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nctinv.html">nctinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the non-central t-cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nctpdf.html">nctpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Noncentral t-probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nctrnd.html">nctrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the noncentral t-distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ncx2cdf.html">ncx2cdf</a>
+                   </code></b>
+                 </td>
+                 <td>Noncentral chi-squared cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ncx2inv.html">ncx2inv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the noncentral chi-squared cumulative distribution function
+(iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ncx2pdf.html">ncx2pdf</a>
+                   </code></b>
+                 </td>
+                 <td>Noncentral chi-squared probability distribution function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ncx2rnd.html">ncx2rnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the noncentral chi-squared distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="normcdf.html">normcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Normal cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="norminv.html">norminv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the normal cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="normpdf.html">normpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Normal probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="normrnd.html">normrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the normal distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="plcdf.html">plcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Piecewise linear cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="plinv.html">plinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the piecewise linear distribution (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="plpdf.html">plpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Piecewise linear probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="plrnd.html">plrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the piecewise linear distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="poisscdf.html">poisscdf</a>
+                   </code></b>
+                 </td>
+                 <td>Poisson cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="poissinv.html">poissinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the Poisson cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="poisspdf.html">poisspdf</a>
+                   </code></b>
+                 </td>
+                 <td>Poisson probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="poissrnd.html">poissrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the Poisson distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="raylcdf.html">raylcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Rayleigh cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="raylinv.html">raylinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the Rayleigh cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="raylpdf.html">raylpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Rayleigh probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="raylrnd.html">raylrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the Rayleigh distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ricecdf.html">ricecdf</a>
+                   </code></b>
+                 </td>
+                 <td>Rician cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="riceinv.html">riceinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the Rician distribution (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ricepdf.html">ricepdf</a>
+                   </code></b>
+                 </td>
+                 <td>Rician probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ricernd.html">ricernd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the Rician distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tcdf.html">tcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Student's T cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tinv.html">tinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the Student's T cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tpdf.html">tpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Student's T probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="trnd.html">trnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the Student's T distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tlscdf.html">tlscdf</a>
+                   </code></b>
+                 </td>
+                 <td>Location-scale Student's T cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tlsinv.html">tlsinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the location-scale Student's T cumulative distribution
+function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tlspdf.html">tlspdf</a>
+                   </code></b>
+                 </td>
+                 <td>Location-scale Student's T probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tlsrnd.html">tlsrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the location-scale Student's T distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tricdf.html">tricdf</a>
+                   </code></b>
+                 </td>
+                 <td>Triangular cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="triinv.html">triinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the triangular cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tripdf.html">tripdf</a>
+                   </code></b>
+                 </td>
+                 <td>Triangular probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="trirnd.html">trirnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the triangular distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="unidcdf.html">unidcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Discrete uniform cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="unidinv.html">unidinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the discrete uniform cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="unidpdf.html">unidpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Discrete uniform probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="unidrnd.html">unidrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the discrete uniform distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="unifcdf.html">unifcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Continuous uniform cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="unifinv.html">unifinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the continuous uniform cumulative distribution function
+(iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="unifpdf.html">unifpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Continuous uniform probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="unifrnd.html">unifrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the continuous uniform distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="vmcdf.html">vmcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Von Mises probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="vminv.html">vminv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the von Mises cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="vmpdf.html">vmpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Von Mises probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="vmrnd.html">vmrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the von Mises distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="wblcdf.html">wblcdf</a>
+                   </code></b>
+                 </td>
+                 <td>Weibull cumulative distribution function (CDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="wblinv.html">wblinv</a>
+                   </code></b>
+                 </td>
+                 <td>Inverse of the Weibull cumulative distribution function (iCDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="wblpdf.html">wblpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Weibull probability density function (PDF).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="wblrnd.html">wblrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from the Weibull distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="wienrnd.html">wienrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Return a simulated realization of the D-dimensional Wiener Process on
+the interval [0, T].</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="wishpdf.html">wishpdf</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the probability density function of the Wishart distribution</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="wishrnd.html">wishrnd</a>
+                   </code></b>
+                 </td>
+                 <td>Return a random matrix sampled from the Wishart distribution with given
+parameters</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Distribution Statistics">Distribution Statistics</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="betastat.html">betastat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the Beta distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="binostat.html">binostat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the binomial distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="bisastat.html">bisastat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the Birnbaum-Saunders distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="burrstat.html">burrstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the Burr type XII distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="chi2stat.html">chi2stat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the chi-squared distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="evstat.html">evstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the extreme value distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="expstat.html">expstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the exponential distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="fstat.html">fstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the F-distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gamstat.html">gamstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the Gamma distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="geostat.html">geostat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the geometric distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gevstat.html">gevstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the generalized extreme value distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gpstat.html">gpstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the generalized Pareto distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hnstat.html">hnstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the half-normal distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hygestat.html">hygestat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the hypergeometric distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="invgstat.html">invgstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the inverse Gaussian distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="logistat.html">logistat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the logistic distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="loglstat.html">loglstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the loglogistic distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="lognstat.html">lognstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the lognormal distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nakastat.html">nakastat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the Nakagami distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nbinstat.html">nbinstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the negative binomial distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ncfstat.html">ncfstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics for the noncentral F-distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="nctstat.html">nctstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics for the noncentral t-distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ncx2stat.html">ncx2stat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics for the noncentral chi-squared distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="normstat.html">normstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the normal distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="plstat.html">plstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the piecewise linear distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="poisstat.html">poisstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the Poisson distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="raylstat.html">raylstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the Rayleigh distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ricestat.html">ricestat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the Rician distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tlsstat.html">tlsstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the location-scale Student's T distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tristat.html">tristat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the Triangular distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tstat.html">tstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the Student's T distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="unidstat.html">unidstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the discrete uniform cumulative distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="unifstat.html">unifstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the continuous uniform cumulative distribution.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="wblstat.html">wblstat</a>
+                   </code></b>
+                 </td>
+                 <td>Compute statistics of the Weibull distribution.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Distribution Wrappers">Distribution Wrappers</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="cdf.html">cdf</a>
+                   </code></b>
+                 </td>
+                 <td>Return the CDF of a univariate distribution evaluated at X.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="fitdist.html">fitdist</a>
+                   </code></b>
+                 </td>
+                 <td>Create probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="icdf.html">icdf</a>
+                   </code></b>
+                 </td>
+                 <td>Return the inverse CDF of a univariate distribution evaluated at P.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="makedist.html">makedist</a>
+                   </code></b>
+                 </td>
+                 <td>Create probability distribution object.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mle.html">mle</a>
+                   </code></b>
+                 </td>
+                 <td>Compute maximum likelihood estimates.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="pdf.html">pdf</a>
+                   </code></b>
+                 </td>
+                 <td>Return the PDF of a univariate distribution evaluated at X.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="random.html">random</a>
+                   </code></b>
+                 </td>
+                 <td>Random arrays from a given one-, two-, or three-parameter distribution.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Experimental Design">Experimental Design</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="fullfact.html">fullfact</a>
+                   </code></b>
+                 </td>
+                 <td>Full factorial design.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ff2n.html">ff2n</a>
+                   </code></b>
+                 </td>
+                 <td>Two-level full factorial design.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="sigma_pts.html">sigma_pts</a>
+                   </code></b>
+                 </td>
+                 <td>Calculates 2*N+1 sigma points in N dimensions.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="x2fx.html">x2fx</a>
+                   </code></b>
+                 </td>
+                 <td>Convert predictors to design matrix.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Machine Learning">Machine Learning</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hmmestimate.html">hmmestimate</a>
+                   </code></b>
+                 </td>
+                 <td>Estimation of a hidden Markov model for a given sequence.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hmmgenerate.html">hmmgenerate</a>
+                   </code></b>
+                 </td>
+                 <td>Output sequence and hidden states of a hidden Markov model.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hmmviterbi.html">hmmviterbi</a>
+                   </code></b>
+                 </td>
+                 <td>Viterbi path of a hidden Markov model.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="svmpredict.html">svmpredict</a>
+                   </code></b>
+                 </td>
+                 <td>This function predicts new labels from a testing instance matrtix based
+on an SVM MODEL created with 'svmtrain'.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="svmtrain.html">svmtrain</a>
+                   </code></b>
+                 </td>
+                 <td>This function trains an SVM MODEL based on known LABELS and their
+corresponding DATA which comprise an instance matrtix.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Model Fitting">Model Fitting</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="fitcknn.html">fitcknn</a>
+                   </code></b>
+                 </td>
+                 <td>Fit a k-Nearest Neighbor classification model.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="fitgmdist.html">fitgmdist</a>
+                   </code></b>
+                 </td>
+                 <td>Fit a Gaussian mixture model with K components to DATA.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="fitlm.html">fitlm</a>
+                   </code></b>
+                 </td>
+                 <td>Regress the continuous outcome (i.e.  dependent variable) Y on
+continuous or categorical predictors (i.e.  independent variables) X by
+minimizing the sum-of-squared residuals.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="fitrgam.html">fitrgam</a>
+                   </code></b>
+                 </td>
+                 <td>Fit a Generalised Additive Model (GAM) for regression.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Hypothesis Testing">Hypothesis Testing</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="adtest.html">adtest</a>
+                   </code></b>
+                 </td>
+                 <td>Anderson-Darling goodness-of-fit hypothesis test.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="anova1.html">anova1</a>
+                   </code></b>
+                 </td>
+                 <td>Perform a one-way analysis of variance (ANOVA) for comparing the means
+of two or more groups of data under the null hypothesis that the groups
+are drawn from distributions with the same mean.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="anova2.html">anova2</a>
+                   </code></b>
+                 </td>
+                 <td>Performs two-way factorial (crossed) or a nested analysis of variance
+(ANOVA) for balanced designs.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="anovan.html">anovan</a>
+                   </code></b>
+                 </td>
+                 <td>Perform a multi (N)-way analysis of (co)variance (ANOVA or ANCOVA) to
+evaluate the effect of one or more categorical or continuous predictors
+(i.e.  independent variables) on a continuous outcome (i.e.  dependent
+variable).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="bartlett_test.html">bartlett_test</a>
+                   </code></b>
+                 </td>
+                 <td>Perform a Bartlett test for the homogeneity of variances.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="barttest.html">barttest</a>
+                   </code></b>
+                 </td>
+                 <td>Bartlett's test of sphericity for correlation.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="binotest.html">binotest</a>
+                   </code></b>
+                 </td>
+                 <td>Test for probability P of a binomial sample</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="chi2gof.html">chi2gof</a>
+                   </code></b>
+                 </td>
+                 <td>Chi-square goodness-of-fit test.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="chi2test.html">chi2test</a>
+                   </code></b>
+                 </td>
+                 <td>Perform a chi-squared test (for independence or homogeneity).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="correlation_test.html">correlation_test</a>
+                   </code></b>
+                 </td>
+                 <td>Perform a correlation coefficient test whether two samples X and Y come
+from uncorrelated populations.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="fishertest.html">fishertest</a>
+                   </code></b>
+                 </td>
+                 <td>Fisher's exact test.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="friedman.html">friedman</a>
+                   </code></b>
+                 </td>
+                 <td>Performs the nonparametric Friedman's test to compare column effects in
+a two-way layout.  friedman tests the null hypothesis that the column
+effects are all the same against the alternative that they are not all
+the same.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hotelling_t2test.html">hotelling_t2test</a>
+                   </code></b>
+                 </td>
+                 <td>Compute Hotelling's T^2 ("T-squared") test for a single sample or two
+dependent samples (paired-samples).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hotelling_t2test2.html">hotelling_t2test2</a>
+                   </code></b>
+                 </td>
+                 <td>Compute Hotelling's T^2 ("T-squared") test for two independent samples.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="kruskalwallis.html">kruskalwallis</a>
+                   </code></b>
+                 </td>
+                 <td>Perform a Kruskal-Wallis test, the non-parametric alternative of a
+one-way analysis of variance (ANOVA), for comparing the means of two or
+more groups of data under the null hypothesis that the groups are drawn
+from the same population, ...</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="kstest.html">kstest</a>
+                   </code></b>
+                 </td>
+                 <td>Single sample Kolmogorov-Smirnov (K-S) goodness-of-fit hypothesis test.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="kstest2.html">kstest2</a>
+                   </code></b>
+                 </td>
+                 <td>Two-sample Kolmogorov-Smirnov goodness-of-fit hypothesis test.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="levene_test.html">levene_test</a>
+                   </code></b>
+                 </td>
+                 <td>Perform a Levene's test for the homogeneity of variances.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="manova1.html">manova1</a>
+                   </code></b>
+                 </td>
+                 <td>One-way multivariate analysis of variance (MANOVA).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mcnemar_test.html">mcnemar_test</a>
+                   </code></b>
+                 </td>
+                 <td>Perform a McNemar's test on paired nominal data.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="multcompare.html">multcompare</a>
+                   </code></b>
+                 </td>
+                 <td>Perform posthoc multiple comparison tests or p-value adjustments to
+control the family-wise error rate (FWER) or false discovery rate (FDR).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ranksum.html">ranksum</a>
+                   </code></b>
+                 </td>
+                 <td>Wilcoxon rank sum test for equal medians.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="regression_ftest.html">regression_ftest</a>
+                   </code></b>
+                 </td>
+                 <td>F-test for General Linear Regression Analysis</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="regression_ttest.html">regression_ttest</a>
+                   </code></b>
+                 </td>
+                 <td>Perform a linear regression t-test.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="runstest.html">runstest</a>
+                   </code></b>
+                 </td>
+                 <td>Run test for randomness in the vector X.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="sampsizepwr.html">sampsizepwr</a>
+                   </code></b>
+                 </td>
+                 <td>Sample size and power calculation for hypothesis test.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="signtest.html">signtest</a>
+                   </code></b>
+                 </td>
+                 <td>Test for median.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ttest.html">ttest</a>
+                   </code></b>
+                 </td>
+                 <td>Test for mean of a normal sample with unknown variance.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ttest2.html">ttest2</a>
+                   </code></b>
+                 </td>
+                 <td>Perform a t-test to compare the means of two groups of data under the
+null hypothesis that the groups are drawn from distributions with the
+same mean.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="vartest.html">vartest</a>
+                   </code></b>
+                 </td>
+                 <td>One-sample test of variance.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="vartest2.html">vartest2</a>
+                   </code></b>
+                 </td>
+                 <td>Two-sample F test for equal variances.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="vartestn.html">vartestn</a>
+                   </code></b>
+                 </td>
+                 <td>Test for equal variances across multiple groups.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ztest.html">ztest</a>
+                   </code></b>
+                 </td>
+                 <td>One-sample Z-test.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ztest2.html">ztest2</a>
+                   </code></b>
+                 </td>
+                 <td>Two proportions Z-test.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="I/O">I/O</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="libsvmread.html">libsvmread</a>
+                   </code></b>
+                 </td>
+                 <td>This function reads the labels and the corresponding instance_matrix
+from a LIBSVM data file and stores them in LABELS and DATA respectively.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="libsvmwrite.html">libsvmwrite</a>
+                   </code></b>
+                 </td>
+                 <td>This function saves the labels and the corresponding instance_matrix in
+a file specified by FILENAME.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Plotting">Plotting</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="boxplot.html">boxplot</a>
+                   </code></b>
+                 </td>
+                 <td>Produce a box plot.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="cdfplot.html">cdfplot</a>
+                   </code></b>
+                 </td>
+                 <td>Display an empirical cumulative distribution function.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="confusionchart.html">confusionchart</a>
+                   </code></b>
+                 </td>
+                 <td>Display a chart of a confusion matrix.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="dendrogram.html">dendrogram</a>
+                   </code></b>
+                 </td>
+                 <td>Plot a dendrogram of a hierarchical binary cluster tree.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ecdf.html">ecdf</a>
+                   </code></b>
+                 </td>
+                 <td>Empirical (Kaplan-Meier) cumulative distribution function.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="einstein.html">einstein</a>
+                   </code></b>
+                 </td>
+                 <td>Plots the tiling of the basic clusters of einstein tiles.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="gscatter.html">gscatter</a>
+                   </code></b>
+                 </td>
+                 <td>Draw a scatter plot with grouped data.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="histfit.html">histfit</a>
+                   </code></b>
+                 </td>
+                 <td>Plot histogram with superimposed distribution fit.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="hist3.html">hist3</a>
+                   </code></b>
+                 </td>
+                 <td>Produce bivariate (2D) histogram counts or plots.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="manovacluster.html">manovacluster</a>
+                   </code></b>
+                 </td>
+                 <td>Cluster group means using manova1 output.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="normplot.html">normplot</a>
+                   </code></b>
+                 </td>
+                 <td>Produce normal probability plot of the data in X.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ppplot.html">ppplot</a>
+                   </code></b>
+                 </td>
+                 <td>Perform a PP-plot (probability plot).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="qqplot.html">qqplot</a>
+                   </code></b>
+                 </td>
+                 <td>Perform a QQ-plot (quantile plot).</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="silhouette.html">silhouette</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the silhouette values of clustered data and show them on a plot.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="violin.html">violin</a>
+                   </code></b>
+                 </td>
+                 <td>Produce a Violin plot of the data X.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="wblplot.html">wblplot</a>
+                   </code></b>
+                 </td>
+                 <td>Plot a column vector DATA on a Weibull probability plot using rank
+regression.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Regression">Regression</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="canoncorr.html">canoncorr</a>
+                   </code></b>
+                 </td>
+                 <td>Canonical correlation analysis.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="cholcov.html">cholcov</a>
+                   </code></b>
+                 </td>
+                 <td>Cholesky-like decomposition for covariance matrix.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="dcov.html">dcov</a>
+                   </code></b>
+                 </td>
+                 <td>Distance correlation, covariance and correlation statistics.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="glmfit.html">glmfit</a>
+                   </code></b>
+                 </td>
+                 <td>Perform generalized linear model fitting.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="logistic_regression.html">logistic_regression</a>
+                   </code></b>
+                 </td>
+                 <td>Perform ordinal logistic regression.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="mnrfit.html">mnrfit</a>
+                   </code></b>
+                 </td>
+                 <td>Perform logistic regression for binomial responses or multiple ordinal
+responses.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="monotone_smooth.html">monotone_smooth</a>
+                   </code></b>
+                 </td>
+                 <td>Produce a smooth monotone increasing approximation to a sampled
+functional dependence.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="pca.html">pca</a>
+                   </code></b>
+                 </td>
+                 <td>Performs a principal component analysis on a data matrix.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="pcacov.html">pcacov</a>
+                   </code></b>
+                 </td>
+                 <td>Perform principal component analysis on covariance matrix</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="pcares.html">pcares</a>
+                   </code></b>
+                 </td>
+                 <td>Calculate residuals from principal component analysis.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="plsregress.html">plsregress</a>
+                   </code></b>
+                 </td>
+                 <td>Calculate partial least squares regression using SIMPLS algorithm.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="princomp.html">princomp</a>
+                   </code></b>
+                 </td>
+                 <td>Performs a principal component analysis on a NxP data matrix X.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="regress.html">regress</a>
+                   </code></b>
+                 </td>
+                 <td>Multiple Linear Regression using Least Squares Fit of Y on X with the
+model 'y = X * beta + e'.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="regress_gp.html">regress_gp</a>
+                   </code></b>
+                 </td>
+                 <td>Regression using Gaussian Processes.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="ridge.html">ridge</a>
+                   </code></b>
+                 </td>
+                 <td>Ridge regression.</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="stepwisefit.html">stepwisefit</a>
+                   </code></b>
+                 </td>
+                 <td>Linear regression with stepwise variable selection.</td>
+               </tr>
+             </tbody>
+           </table>
+           <h3 class="category">
+             <a name="Transforms">Transforms</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="logit.html">logit</a>
+                   </code></b>
+                 </td>
+                 <td>Compute the logit for each value of P</td>
+               </tr>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="probit.html">probit</a>
+                   </code></b>
+                 </td>
+                 <td>Probit transformation</td>
+               </tr>
+             </tbody>
+           </table>
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Statistics: multcompare</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <script type="text/javascript">
+      window.addEventListener("load", () => {
+        for (let i of document.querySelectorAll(".collapse ul")) {
+          let tog = document.createElement("div");
+          tog.innerHTML = i.previousSibling.textContent;
+          tog.className = "toggle";
+          tog.onclick = () => tog.classList.toggle("show");
+          i.parentElement.removeChild(i.previousSibling);
+          i.parentElement.insertBefore(tog, i);
+        }
+      });
+    </script>
+    <style>
+    h6:hover {
+      color: gray;
+    }
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    [id^="togList"],                        /* HIDE CHECKBOX */
+    [id^="togList"] ~ .list,                /* HIDE LIST */
+    [id^="togList"] + label  span + span,   /* HIDE "Collapse" */
+    [id^="togList"]:checked + label span{   /* HIDE "Expand" (IF CHECKED) */
+      display:none;
+    }
+    [id^="togList"]:checked + label span + span{
+      display:inline-block;                 /* SHOW "Collapse" (IF CHECKED) */
+    }
+    [id^="togList"]:checked ~ .list{
+      display:block;                        /* SHOW LIST (IF CHECKED) */
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/statistics.png" alt="statistics" class="d-inline-block align-top" width="25" height="25">
+              Statistics
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Hypothesis Testing">
+                    <i class="fas fa-list-alt"></i>
+                    Hypothesis Testing
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="row flex-nowrap" style="min-height:0">
+        <div class="col-md-2 bg-light" style="overflow-y: scroll; width: 250px;">
+          <div class="p-2" style="text-align: center;">
+            <h3>Categories &</h3>
+            <h4 style="color: blue">Functions List</h4>
+          </div>
+			<div class="row">
+				<input id="togList1" type="checkbox">
+				<label for="togList1">
+					<span><h6>CVpartition</h6></span>
+					<span><h6>CVpartition</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="@cvpartition_cvpartition.html" class="text-decoration-none font-monospace"><small>@cvpartition/cvpartition</small></a></li>
+					<li><a href="@cvpartition_display.html" class="text-decoration-none font-monospace"><small>@cvpartition/display</small></a></li>
+					<li><a href="@cvpartition_get.html" class="text-decoration-none font-monospace"><small>@cvpartition/get</small></a></li>
+					<li><a href="@cvpartition_repartition.html" class="text-decoration-none font-monospace"><small>@cvpartition/repartition</small></a></li>
+					<li><a href="@cvpartition_set.html" class="text-decoration-none font-monospace"><small>@cvpartition/set</small></a></li>
+					<li><a href="@cvpartition_test.html" class="text-decoration-none font-monospace"><small>@cvpartition/test</small></a></li>
+					<li><a href="@cvpartition_training.html" class="text-decoration-none font-monospace"><small>@cvpartition/training</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList2" type="checkbox">
+				<label for="togList2">
+					<span><h6>Classification Classes</h6></span>
+					<span><h6>Classification Classes</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="ClassificationKNN.html" class="text-decoration-none font-monospace"><small>ClassificationKNN</small></a></li>
+					<li><a href="ConfusionMatrixChart.html" class="text-decoration-none font-monospace"><small>ConfusionMatrixChart</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList3" type="checkbox">
+				<label for="togList3">
+					<span><h6>Clustering</h6></span>
+					<span><h6>Clustering</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="cluster.html" class="text-decoration-none font-monospace"><small>cluster</small></a></li>
+					<li><a href="clusterdata.html" class="text-decoration-none font-monospace"><small>clusterdata</small></a></li>
+					<li><a href="cmdscale.html" class="text-decoration-none font-monospace"><small>cmdscale</small></a></li>
+					<li><a href="confusionmat.html" class="text-decoration-none font-monospace"><small>confusionmat</small></a></li>
+					<li><a href="cophenet.html" class="text-decoration-none font-monospace"><small>cophenet</small></a></li>
+					<li><a href="crossval.html" class="text-decoration-none font-monospace"><small>crossval</small></a></li>
+					<li><a href="editDistance.html" class="text-decoration-none font-monospace"><small>editDistance</small></a></li>
+					<li><a href="evalclusters.html" class="text-decoration-none font-monospace"><small>evalclusters</small></a></li>
+					<li><a href="inconsistent.html" class="text-decoration-none font-monospace"><small>inconsistent</small></a></li>
+					<li><a href="kmeans.html" class="text-decoration-none font-monospace"><small>kmeans</small></a></li>
+					<li><a href="knnsearch.html" class="text-decoration-none font-monospace"><small>knnsearch</small></a></li>
+					<li><a href="linkage.html" class="text-decoration-none font-monospace"><small>linkage</small></a></li>
+					<li><a href="mahal.html" class="text-decoration-none font-monospace"><small>mahal</small></a></li>
+					<li><a href="mhsample.html" class="text-decoration-none font-monospace"><small>mhsample</small></a></li>
+					<li><a href="optimalleaforder.html" class="text-decoration-none font-monospace"><small>optimalleaforder</small></a></li>
+					<li><a href="pdist.html" class="text-decoration-none font-monospace"><small>pdist</small></a></li>
+					<li><a href="pdist2.html" class="text-decoration-none font-monospace"><small>pdist2</small></a></li>
+					<li><a href="procrustes.html" class="text-decoration-none font-monospace"><small>procrustes</small></a></li>
+					<li><a href="rangesearch.html" class="text-decoration-none font-monospace"><small>rangesearch</small></a></li>
+					<li><a href="slicesample.html" class="text-decoration-none font-monospace"><small>slicesample</small></a></li>
+					<li><a href="squareform.html" class="text-decoration-none font-monospace"><small>squareform</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList4" type="checkbox">
+				<label for="togList4">
+					<span><h6>Clustering Classes</h6></span>
+					<span><h6>Clustering Classes</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="CalinskiHarabaszEvaluation.html" class="text-decoration-none font-monospace"><small>CalinskiHarabaszEvaluation</small></a></li>
+					<li><a href="ClusterCriterion.html" class="text-decoration-none font-monospace"><small>ClusterCriterion</small></a></li>
+					<li><a href="DaviesBouldinEvaluation.html" class="text-decoration-none font-monospace"><small>DaviesBouldinEvaluation</small></a></li>
+					<li><a href="GapEvaluation.html" class="text-decoration-none font-monospace"><small>GapEvaluation</small></a></li>
+					<li><a href="SilhouetteEvaluation.html" class="text-decoration-none font-monospace"><small>SilhouetteEvaluation</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList5" type="checkbox">
+				<label for="togList5">
+					<span><h6>Data Manipulation</h6></span>
+					<span><h6>Data Manipulation</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="combnk.html" class="text-decoration-none font-monospace"><small>combnk</small></a></li>
+					<li><a href="crosstab.html" class="text-decoration-none font-monospace"><small>crosstab</small></a></li>
+					<li><a href="datasample.html" class="text-decoration-none font-monospace"><small>datasample</small></a></li>
+					<li><a href="fillmissing.html" class="text-decoration-none font-monospace"><small>fillmissing</small></a></li>
+					<li><a href="grp2idx.html" class="text-decoration-none font-monospace"><small>grp2idx</small></a></li>
+					<li><a href="ismissing.html" class="text-decoration-none font-monospace"><small>ismissing</small></a></li>
+					<li><a href="isoutlier.html" class="text-decoration-none font-monospace"><small>isoutlier</small></a></li>
+					<li><a href="normalise_distribution.html" class="text-decoration-none font-monospace"><small>normalise_distribution</small></a></li>
+					<li><a href="rmmissing.html" class="text-decoration-none font-monospace"><small>rmmissing</small></a></li>
+					<li><a href="standardizeMissing.html" class="text-decoration-none font-monospace"><small>standardizeMissing</small></a></li>
+					<li><a href="tabulate.html" class="text-decoration-none font-monospace"><small>tabulate</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList6" type="checkbox">
+				<label for="togList6">
+					<span><h6>Descriptive Statistics</h6></span>
+					<span><h6>Descriptive Statistics</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="cdfcalc.html" class="text-decoration-none font-monospace"><small>cdfcalc</small></a></li>
+					<li><a href="cl_multinom.html" class="text-decoration-none font-monospace"><small>cl_multinom</small></a></li>
+					<li><a href="geomean.html" class="text-decoration-none font-monospace"><small>geomean</small></a></li>
+					<li><a href="grpstats.html" class="text-decoration-none font-monospace"><small>grpstats</small></a></li>
+					<li><a href="harmmean.html" class="text-decoration-none font-monospace"><small>harmmean</small></a></li>
+					<li><a href="jackknife.html" class="text-decoration-none font-monospace"><small>jackknife</small></a></li>
+					<li><a href="mad.html" class="text-decoration-none font-monospace"><small>mad</small></a></li>
+					<li><a href="mean.html" class="text-decoration-none font-monospace"><small>mean</small></a></li>
+					<li><a href="median.html" class="text-decoration-none font-monospace"><small>median</small></a></li>
+					<li><a href="nanmax.html" class="text-decoration-none font-monospace"><small>nanmax</small></a></li>
+					<li><a href="nanmin.html" class="text-decoration-none font-monospace"><small>nanmin</small></a></li>
+					<li><a href="nansum.html" class="text-decoration-none font-monospace"><small>nansum</small></a></li>
+					<li><a href="std.html" class="text-decoration-none font-monospace"><small>std</small></a></li>
+					<li><a href="trimmean.html" class="text-decoration-none font-monospace"><small>trimmean</small></a></li>
+					<li><a href="var.html" class="text-decoration-none font-monospace"><small>var</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList7" type="checkbox">
+				<label for="togList7">
+					<span><h6>Distribution Classes</h6></span>
+					<span><h6>Distribution Classes</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="BetaDistribution.html" class="text-decoration-none font-monospace"><small>BetaDistribution</small></a></li>
+					<li><a href="BinomialDistribution.html" class="text-decoration-none font-monospace"><small>BinomialDistribution</small></a></li>
+					<li><a href="BirnbaumSaundersDistribution.html" class="text-decoration-none font-monospace"><small>BirnbaumSaundersDistribution</small></a></li>
+					<li><a href="BurrDistribution.html" class="text-decoration-none font-monospace"><small>BurrDistribution</small></a></li>
+					<li><a href="ExponentialDistribution.html" class="text-decoration-none font-monospace"><small>ExponentialDistribution</small></a></li>
+					<li><a href="ExtremeValueDistribution.html" class="text-decoration-none font-monospace"><small>ExtremeValueDistribution</small></a></li>
+					<li><a href="GammaDistribution.html" class="text-decoration-none font-monospace"><small>GammaDistribution</small></a></li>
+					<li><a href="GeneralizedExtremeValueDistribution.html" class="text-decoration-none font-monospace"><small>GeneralizedExtremeValueDistribution</small></a></li>
+					<li><a href="GeneralizedParetoDistribution.html" class="text-decoration-none font-monospace"><small>GeneralizedParetoDistribution</small></a></li>
+					<li><a href="HalfNormalDistribution.html" class="text-decoration-none font-monospace"><small>HalfNormalDistribution</small></a></li>
+					<li><a href="InverseGaussianDistribution.html" class="text-decoration-none font-monospace"><small>InverseGaussianDistribution</small></a></li>
+					<li><a href="LogisticDistribution.html" class="text-decoration-none font-monospace"><small>LogisticDistribution</small></a></li>
+					<li><a href="LoglogisticDistribution.html" class="text-decoration-none font-monospace"><small>LoglogisticDistribution</small></a></li>
+					<li><a href="LognormalDistribution.html" class="text-decoration-none font-monospace"><small>LognormalDistribution</small></a></li>
+					<li><a href="LoguniformDistribution.html" class="text-decoration-none font-monospace"><small>LoguniformDistribution</small></a></li>
+					<li><a href="MultinomialDistribution.html" class="text-decoration-none font-monospace"><small>MultinomialDistribution</small></a></li>
+					<li><a href="NakagamiDistribution.html" class="text-decoration-none font-monospace"><small>NakagamiDistribution</small></a></li>
+					<li><a href="NegativeBinomialDistribution.html" class="text-decoration-none font-monospace"><small>NegativeBinomialDistribution</small></a></li>
+					<li><a href="NormalDistribution.html" class="text-decoration-none font-monospace"><small>NormalDistribution</small></a></li>
+					<li><a href="PiecewiseLinearDistribution.html" class="text-decoration-none font-monospace"><small>PiecewiseLinearDistribution</small></a></li>
+					<li><a href="PoissonDistribution.html" class="text-decoration-none font-monospace"><small>PoissonDistribution</small></a></li>
+					<li><a href="RayleighDistribution.html" class="text-decoration-none font-monospace"><small>RayleighDistribution</small></a></li>
+					<li><a href="RicianDistribution.html" class="text-decoration-none font-monospace"><small>RicianDistribution</small></a></li>
+					<li><a href="tLocationScaleDistribution.html" class="text-decoration-none font-monospace"><small>tLocationScaleDistribution</small></a></li>
+					<li><a href="TriangularDistribution.html" class="text-decoration-none font-monospace"><small>TriangularDistribution</small></a></li>
+					<li><a href="UniformDistribution.html" class="text-decoration-none font-monospace"><small>UniformDistribution</small></a></li>
+					<li><a href="WeibullDistribution.html" class="text-decoration-none font-monospace"><small>WeibullDistribution</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList8" type="checkbox">
+				<label for="togList8">
+					<span><h6>Distribution Fitting</h6></span>
+					<span><h6>Distribution Fitting</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="betafit.html" class="text-decoration-none font-monospace"><small>betafit</small></a></li>
+					<li><a href="betalike.html" class="text-decoration-none font-monospace"><small>betalike</small></a></li>
+					<li><a href="binofit.html" class="text-decoration-none font-monospace"><small>binofit</small></a></li>
+					<li><a href="binolike.html" class="text-decoration-none font-monospace"><small>binolike</small></a></li>
+					<li><a href="bisafit.html" class="text-decoration-none font-monospace"><small>bisafit</small></a></li>
+					<li><a href="bisalike.html" class="text-decoration-none font-monospace"><small>bisalike</small></a></li>
+					<li><a href="burrfit.html" class="text-decoration-none font-monospace"><small>burrfit</small></a></li>
+					<li><a href="burrlike.html" class="text-decoration-none font-monospace"><small>burrlike</small></a></li>
+					<li><a href="evfit.html" class="text-decoration-none font-monospace"><small>evfit</small></a></li>
+					<li><a href="evlike.html" class="text-decoration-none font-monospace"><small>evlike</small></a></li>
+					<li><a href="expfit.html" class="text-decoration-none font-monospace"><small>expfit</small></a></li>
+					<li><a href="explike.html" class="text-decoration-none font-monospace"><small>explike</small></a></li>
+					<li><a href="gamfit.html" class="text-decoration-none font-monospace"><small>gamfit</small></a></li>
+					<li><a href="gamlike.html" class="text-decoration-none font-monospace"><small>gamlike</small></a></li>
+					<li><a href="geofit.html" class="text-decoration-none font-monospace"><small>geofit</small></a></li>
+					<li><a href="gevfit_lmom.html" class="text-decoration-none font-monospace"><small>gevfit_lmom</small></a></li>
+					<li><a href="gevfit.html" class="text-decoration-none font-monospace"><small>gevfit</small></a></li>
+					<li><a href="gevlike.html" class="text-decoration-none font-monospace"><small>gevlike</small></a></li>
+					<li><a href="gpfit.html" class="text-decoration-none font-monospace"><small>gpfit</small></a></li>
+					<li><a href="gplike.html" class="text-decoration-none font-monospace"><small>gplike</small></a></li>
+					<li><a href="gumbelfit.html" class="text-decoration-none font-monospace"><small>gumbelfit</small></a></li>
+					<li><a href="gumbellike.html" class="text-decoration-none font-monospace"><small>gumbellike</small></a></li>
+					<li><a href="hnfit.html" class="text-decoration-none font-monospace"><small>hnfit</small></a></li>
+					<li><a href="hnlike.html" class="text-decoration-none font-monospace"><small>hnlike</small></a></li>
+					<li><a href="invgfit.html" class="text-decoration-none font-monospace"><small>invgfit</small></a></li>
+					<li><a href="invglike.html" class="text-decoration-none font-monospace"><small>invglike</small></a></li>
+					<li><a href="logifit.html" class="text-decoration-none font-monospace"><small>logifit</small></a></li>
+					<li><a href="logilike.html" class="text-decoration-none font-monospace"><small>logilike</small></a></li>
+					<li><a href="loglfit.html" class="text-decoration-none font-monospace"><small>loglfit</small></a></li>
+					<li><a href="logllike.html" class="text-decoration-none font-monospace"><small>logllike</small></a></li>
+					<li><a href="lognfit.html" class="text-decoration-none font-monospace"><small>lognfit</small></a></li>
+					<li><a href="lognlike.html" class="text-decoration-none font-monospace"><small>lognlike</small></a></li>
+					<li><a href="nakafit.html" class="text-decoration-none font-monospace"><small>nakafit</small></a></li>
+					<li><a href="nakalike.html" class="text-decoration-none font-monospace"><small>nakalike</small></a></li>
+					<li><a href="nbinfit.html" class="text-decoration-none font-monospace"><small>nbinfit</small></a></li>
+					<li><a href="nbinlike.html" class="text-decoration-none font-monospace"><small>nbinlike</small></a></li>
+					<li><a href="normfit.html" class="text-decoration-none font-monospace"><small>normfit</small></a></li>
+					<li><a href="normlike.html" class="text-decoration-none font-monospace"><small>normlike</small></a></li>
+					<li><a href="poissfit.html" class="text-decoration-none font-monospace"><small>poissfit</small></a></li>
+					<li><a href="poisslike.html" class="text-decoration-none font-monospace"><small>poisslike</small></a></li>
+					<li><a href="raylfit.html" class="text-decoration-none font-monospace"><small>raylfit</small></a></li>
+					<li><a href="rayllike.html" class="text-decoration-none font-monospace"><small>rayllike</small></a></li>
+					<li><a href="ricefit.html" class="text-decoration-none font-monospace"><small>ricefit</small></a></li>
+					<li><a href="ricelike.html" class="text-decoration-none font-monospace"><small>ricelike</small></a></li>
+					<li><a href="tlsfit.html" class="text-decoration-none font-monospace"><small>tlsfit</small></a></li>
+					<li><a href="tlslike.html" class="text-decoration-none font-monospace"><small>tlslike</small></a></li>
+					<li><a href="unidfit.html" class="text-decoration-none font-monospace"><small>unidfit</small></a></li>
+					<li><a href="unifit.html" class="text-decoration-none font-monospace"><small>unifit</small></a></li>
+					<li><a href="wblfit.html" class="text-decoration-none font-monospace"><small>wblfit</small></a></li>
+					<li><a href="wbllike.html" class="text-decoration-none font-monospace"><small>wbllike</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList9" type="checkbox">
+				<label for="togList9">
+					<span><h6>Distribution Functions</h6></span>
+					<span><h6>Distribution Functions</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="betacdf.html" class="text-decoration-none font-monospace"><small>betacdf</small></a></li>
+					<li><a href="betainv.html" class="text-decoration-none font-monospace"><small>betainv</small></a></li>
+					<li><a href="betapdf.html" class="text-decoration-none font-monospace"><small>betapdf</small></a></li>
+					<li><a href="betarnd.html" class="text-decoration-none font-monospace"><small>betarnd</small></a></li>
+					<li><a href="binocdf.html" class="text-decoration-none font-monospace"><small>binocdf</small></a></li>
+					<li><a href="binoinv.html" class="text-decoration-none font-monospace"><small>binoinv</small></a></li>
+					<li><a href="binopdf.html" class="text-decoration-none font-monospace"><small>binopdf</small></a></li>
+					<li><a href="binornd.html" class="text-decoration-none font-monospace"><small>binornd</small></a></li>
+					<li><a href="bisacdf.html" class="text-decoration-none font-monospace"><small>bisacdf</small></a></li>
+					<li><a href="bisainv.html" class="text-decoration-none font-monospace"><small>bisainv</small></a></li>
+					<li><a href="bisapdf.html" class="text-decoration-none font-monospace"><small>bisapdf</small></a></li>
+					<li><a href="bisarnd.html" class="text-decoration-none font-monospace"><small>bisarnd</small></a></li>
+					<li><a href="burrcdf.html" class="text-decoration-none font-monospace"><small>burrcdf</small></a></li>
+					<li><a href="burrinv.html" class="text-decoration-none font-monospace"><small>burrinv</small></a></li>
+					<li><a href="burrpdf.html" class="text-decoration-none font-monospace"><small>burrpdf</small></a></li>
+					<li><a href="burrrnd.html" class="text-decoration-none font-monospace"><small>burrrnd</small></a></li>
+					<li><a href="bvncdf.html" class="text-decoration-none font-monospace"><small>bvncdf</small></a></li>
+					<li><a href="bvtcdf.html" class="text-decoration-none font-monospace"><small>bvtcdf</small></a></li>
+					<li><a href="cauchycdf.html" class="text-decoration-none font-monospace"><small>cauchycdf</small></a></li>
+					<li><a href="cauchyinv.html" class="text-decoration-none font-monospace"><small>cauchyinv</small></a></li>
+					<li><a href="cauchypdf.html" class="text-decoration-none font-monospace"><small>cauchypdf</small></a></li>
+					<li><a href="cauchyrnd.html" class="text-decoration-none font-monospace"><small>cauchyrnd</small></a></li>
+					<li><a href="chi2cdf.html" class="text-decoration-none font-monospace"><small>chi2cdf</small></a></li>
+					<li><a href="chi2inv.html" class="text-decoration-none font-monospace"><small>chi2inv</small></a></li>
+					<li><a href="chi2pdf.html" class="text-decoration-none font-monospace"><small>chi2pdf</small></a></li>
+					<li><a href="chi2rnd.html" class="text-decoration-none font-monospace"><small>chi2rnd</small></a></li>
+					<li><a href="copulacdf.html" class="text-decoration-none font-monospace"><small>copulacdf</small></a></li>
+					<li><a href="copulapdf.html" class="text-decoration-none font-monospace"><small>copulapdf</small></a></li>
+					<li><a href="copularnd.html" class="text-decoration-none font-monospace"><small>copularnd</small></a></li>
+					<li><a href="evcdf.html" class="text-decoration-none font-monospace"><small>evcdf</small></a></li>
+					<li><a href="evinv.html" class="text-decoration-none font-monospace"><small>evinv</small></a></li>
+					<li><a href="evpdf.html" class="text-decoration-none font-monospace"><small>evpdf</small></a></li>
+					<li><a href="evrnd.html" class="text-decoration-none font-monospace"><small>evrnd</small></a></li>
+					<li><a href="expcdf.html" class="text-decoration-none font-monospace"><small>expcdf</small></a></li>
+					<li><a href="expinv.html" class="text-decoration-none font-monospace"><small>expinv</small></a></li>
+					<li><a href="exppdf.html" class="text-decoration-none font-monospace"><small>exppdf</small></a></li>
+					<li><a href="exprnd.html" class="text-decoration-none font-monospace"><small>exprnd</small></a></li>
+					<li><a href="fcdf.html" class="text-decoration-none font-monospace"><small>fcdf</small></a></li>
+					<li><a href="finv.html" class="text-decoration-none font-monospace"><small>finv</small></a></li>
+					<li><a href="fpdf.html" class="text-decoration-none font-monospace"><small>fpdf</small></a></li>
+					<li><a href="frnd.html" class="text-decoration-none font-monospace"><small>frnd</small></a></li>
+					<li><a href="gamcdf.html" class="text-decoration-none font-monospace"><small>gamcdf</small></a></li>
+					<li><a href="gaminv.html" class="text-decoration-none font-monospace"><small>gaminv</small></a></li>
+					<li><a href="gampdf.html" class="text-decoration-none font-monospace"><small>gampdf</small></a></li>
+					<li><a href="gamrnd.html" class="text-decoration-none font-monospace"><small>gamrnd</small></a></li>
+					<li><a href="geocdf.html" class="text-decoration-none font-monospace"><small>geocdf</small></a></li>
+					<li><a href="geoinv.html" class="text-decoration-none font-monospace"><small>geoinv</small></a></li>
+					<li><a href="geopdf.html" class="text-decoration-none font-monospace"><small>geopdf</small></a></li>
+					<li><a href="geornd.html" class="text-decoration-none font-monospace"><small>geornd</small></a></li>
+					<li><a href="gevcdf.html" class="text-decoration-none font-monospace"><small>gevcdf</small></a></li>
+					<li><a href="gevinv.html" class="text-decoration-none font-monospace"><small>gevinv</small></a></li>
+					<li><a href="gevpdf.html" class="text-decoration-none font-monospace"><small>gevpdf</small></a></li>
+					<li><a href="gevrnd.html" class="text-decoration-none font-monospace"><small>gevrnd</small></a></li>
+					<li><a href="gpcdf.html" class="text-decoration-none font-monospace"><small>gpcdf</small></a></li>
+					<li><a href="gpinv.html" class="text-decoration-none font-monospace"><small>gpinv</small></a></li>
+					<li><a href="gppdf.html" class="text-decoration-none font-monospace"><small>gppdf</small></a></li>
+					<li><a href="gprnd.html" class="text-decoration-none font-monospace"><small>gprnd</small></a></li>
+					<li><a href="gumbelcdf.html" class="text-decoration-none font-monospace"><small>gumbelcdf</small></a></li>
+					<li><a href="gumbelinv.html" class="text-decoration-none font-monospace"><small>gumbelinv</small></a></li>
+					<li><a href="gumbelpdf.html" class="text-decoration-none font-monospace"><small>gumbelpdf</small></a></li>
+					<li><a href="gumbelrnd.html" class="text-decoration-none font-monospace"><small>gumbelrnd</small></a></li>
+					<li><a href="hncdf.html" class="text-decoration-none font-monospace"><small>hncdf</small></a></li>
+					<li><a href="hninv.html" class="text-decoration-none font-monospace"><small>hninv</small></a></li>
+					<li><a href="hnpdf.html" class="text-decoration-none font-monospace"><small>hnpdf</small></a></li>
+					<li><a href="hnrnd.html" class="text-decoration-none font-monospace"><small>hnrnd</small></a></li>
+					<li><a href="hygecdf.html" class="text-decoration-none font-monospace"><small>hygecdf</small></a></li>
+					<li><a href="hygeinv.html" class="text-decoration-none font-monospace"><small>hygeinv</small></a></li>
+					<li><a href="hygepdf.html" class="text-decoration-none font-monospace"><small>hygepdf</small></a></li>
+					<li><a href="hygernd.html" class="text-decoration-none font-monospace"><small>hygernd</small></a></li>
+					<li><a href="invgcdf.html" class="text-decoration-none font-monospace"><small>invgcdf</small></a></li>
+					<li><a href="invginv.html" class="text-decoration-none font-monospace"><small>invginv</small></a></li>
+					<li><a href="invgpdf.html" class="text-decoration-none font-monospace"><small>invgpdf</small></a></li>
+					<li><a href="invgrnd.html" class="text-decoration-none font-monospace"><small>invgrnd</small></a></li>
+					<li><a href="iwishpdf.html" class="text-decoration-none font-monospace"><small>iwishpdf</small></a></li>
+					<li><a href="iwishrnd.html" class="text-decoration-none font-monospace"><small>iwishrnd</small></a></li>
+					<li><a href="jsucdf.html" class="text-decoration-none font-monospace"><small>jsucdf</small></a></li>
+					<li><a href="jsupdf.html" class="text-decoration-none font-monospace"><small>jsupdf</small></a></li>
+					<li><a href="laplacecdf.html" class="text-decoration-none font-monospace"><small>laplacecdf</small></a></li>
+					<li><a href="laplaceinv.html" class="text-decoration-none font-monospace"><small>laplaceinv</small></a></li>
+					<li><a href="laplacepdf.html" class="text-decoration-none font-monospace"><small>laplacepdf</small></a></li>
+					<li><a href="laplacernd.html" class="text-decoration-none font-monospace"><small>laplacernd</small></a></li>
+					<li><a href="logicdf.html" class="text-decoration-none font-monospace"><small>logicdf</small></a></li>
+					<li><a href="logiinv.html" class="text-decoration-none font-monospace"><small>logiinv</small></a></li>
+					<li><a href="logipdf.html" class="text-decoration-none font-monospace"><small>logipdf</small></a></li>
+					<li><a href="logirnd.html" class="text-decoration-none font-monospace"><small>logirnd</small></a></li>
+					<li><a href="loglcdf.html" class="text-decoration-none font-monospace"><small>loglcdf</small></a></li>
+					<li><a href="loglinv.html" class="text-decoration-none font-monospace"><small>loglinv</small></a></li>
+					<li><a href="loglpdf.html" class="text-decoration-none font-monospace"><small>loglpdf</small></a></li>
+					<li><a href="loglrnd.html" class="text-decoration-none font-monospace"><small>loglrnd</small></a></li>
+					<li><a href="logncdf.html" class="text-decoration-none font-monospace"><small>logncdf</small></a></li>
+					<li><a href="logninv.html" class="text-decoration-none font-monospace"><small>logninv</small></a></li>
+					<li><a href="lognpdf.html" class="text-decoration-none font-monospace"><small>lognpdf</small></a></li>
+					<li><a href="lognrnd.html" class="text-decoration-none font-monospace"><small>lognrnd</small></a></li>
+					<li><a href="mnpdf.html" class="text-decoration-none font-monospace"><small>mnpdf</small></a></li>
+					<li><a href="mnrnd.html" class="text-decoration-none font-monospace"><small>mnrnd</small></a></li>
+					<li><a href="mvncdf.html" class="text-decoration-none font-monospace"><small>mvncdf</small></a></li>
+					<li><a href="mvnpdf.html" class="text-decoration-none font-monospace"><small>mvnpdf</small></a></li>
+					<li><a href="mvnrnd.html" class="text-decoration-none font-monospace"><small>mvnrnd</small></a></li>
+					<li><a href="mvtcdf.html" class="text-decoration-none font-monospace"><small>mvtcdf</small></a></li>
+					<li><a href="mvtpdf.html" class="text-decoration-none font-monospace"><small>mvtpdf</small></a></li>
+					<li><a href="mvtrnd.html" class="text-decoration-none font-monospace"><small>mvtrnd</small></a></li>
+					<li><a href="mvtcdfqmc.html" class="text-decoration-none font-monospace"><small>mvtcdfqmc</small></a></li>
+					<li><a href="nakacdf.html" class="text-decoration-none font-monospace"><small>nakacdf</small></a></li>
+					<li><a href="nakainv.html" class="text-decoration-none font-monospace"><small>nakainv</small></a></li>
+					<li><a href="nakapdf.html" class="text-decoration-none font-monospace"><small>nakapdf</small></a></li>
+					<li><a href="nakarnd.html" class="text-decoration-none font-monospace"><small>nakarnd</small></a></li>
+					<li><a href="nbincdf.html" class="text-decoration-none font-monospace"><small>nbincdf</small></a></li>
+					<li><a href="nbininv.html" class="text-decoration-none font-monospace"><small>nbininv</small></a></li>
+					<li><a href="nbinpdf.html" class="text-decoration-none font-monospace"><small>nbinpdf</small></a></li>
+					<li><a href="nbinrnd.html" class="text-decoration-none font-monospace"><small>nbinrnd</small></a></li>
+					<li><a href="ncfcdf.html" class="text-decoration-none font-monospace"><small>ncfcdf</small></a></li>
+					<li><a href="ncfinv.html" class="text-decoration-none font-monospace"><small>ncfinv</small></a></li>
+					<li><a href="ncfpdf.html" class="text-decoration-none font-monospace"><small>ncfpdf</small></a></li>
+					<li><a href="ncfrnd.html" class="text-decoration-none font-monospace"><small>ncfrnd</small></a></li>
+					<li><a href="nctcdf.html" class="text-decoration-none font-monospace"><small>nctcdf</small></a></li>
+					<li><a href="nctinv.html" class="text-decoration-none font-monospace"><small>nctinv</small></a></li>
+					<li><a href="nctpdf.html" class="text-decoration-none font-monospace"><small>nctpdf</small></a></li>
+					<li><a href="nctrnd.html" class="text-decoration-none font-monospace"><small>nctrnd</small></a></li>
+					<li><a href="ncx2cdf.html" class="text-decoration-none font-monospace"><small>ncx2cdf</small></a></li>
+					<li><a href="ncx2inv.html" class="text-decoration-none font-monospace"><small>ncx2inv</small></a></li>
+					<li><a href="ncx2pdf.html" class="text-decoration-none font-monospace"><small>ncx2pdf</small></a></li>
+					<li><a href="ncx2rnd.html" class="text-decoration-none font-monospace"><small>ncx2rnd</small></a></li>
+					<li><a href="normcdf.html" class="text-decoration-none font-monospace"><small>normcdf</small></a></li>
+					<li><a href="norminv.html" class="text-decoration-none font-monospace"><small>norminv</small></a></li>
+					<li><a href="normpdf.html" class="text-decoration-none font-monospace"><small>normpdf</small></a></li>
+					<li><a href="normrnd.html" class="text-decoration-none font-monospace"><small>normrnd</small></a></li>
+					<li><a href="plcdf.html" class="text-decoration-none font-monospace"><small>plcdf</small></a></li>
+					<li><a href="plinv.html" class="text-decoration-none font-monospace"><small>plinv</small></a></li>
+					<li><a href="plpdf.html" class="text-decoration-none font-monospace"><small>plpdf</small></a></li>
+					<li><a href="plrnd.html" class="text-decoration-none font-monospace"><small>plrnd</small></a></li>
+					<li><a href="poisscdf.html" class="text-decoration-none font-monospace"><small>poisscdf</small></a></li>
+					<li><a href="poissinv.html" class="text-decoration-none font-monospace"><small>poissinv</small></a></li>
+					<li><a href="poisspdf.html" class="text-decoration-none font-monospace"><small>poisspdf</small></a></li>
+					<li><a href="poissrnd.html" class="text-decoration-none font-monospace"><small>poissrnd</small></a></li>
+					<li><a href="raylcdf.html" class="text-decoration-none font-monospace"><small>raylcdf</small></a></li>
+					<li><a href="raylinv.html" class="text-decoration-none font-monospace"><small>raylinv</small></a></li>
+					<li><a href="raylpdf.html" class="text-decoration-none font-monospace"><small>raylpdf</small></a></li>
+					<li><a href="raylrnd.html" class="text-decoration-none font-monospace"><small>raylrnd</small></a></li>
+					<li><a href="ricecdf.html" class="text-decoration-none font-monospace"><small>ricecdf</small></a></li>
+					<li><a href="riceinv.html" class="text-decoration-none font-monospace"><small>riceinv</small></a></li>
+					<li><a href="ricepdf.html" class="text-decoration-none font-monospace"><small>ricepdf</small></a></li>
+					<li><a href="ricernd.html" class="text-decoration-none font-monospace"><small>ricernd</small></a></li>
+					<li><a href="tcdf.html" class="text-decoration-none font-monospace"><small>tcdf</small></a></li>
+					<li><a href="tinv.html" class="text-decoration-none font-monospace"><small>tinv</small></a></li>
+					<li><a href="tpdf.html" class="text-decoration-none font-monospace"><small>tpdf</small></a></li>
+					<li><a href="trnd.html" class="text-decoration-none font-monospace"><small>trnd</small></a></li>
+					<li><a href="tlscdf.html" class="text-decoration-none font-monospace"><small>tlscdf</small></a></li>
+					<li><a href="tlsinv.html" class="text-decoration-none font-monospace"><small>tlsinv</small></a></li>
+					<li><a href="tlspdf.html" class="text-decoration-none font-monospace"><small>tlspdf</small></a></li>
+					<li><a href="tlsrnd.html" class="text-decoration-none font-monospace"><small>tlsrnd</small></a></li>
+					<li><a href="tricdf.html" class="text-decoration-none font-monospace"><small>tricdf</small></a></li>
+					<li><a href="triinv.html" class="text-decoration-none font-monospace"><small>triinv</small></a></li>
+					<li><a href="tripdf.html" class="text-decoration-none font-monospace"><small>tripdf</small></a></li>
+					<li><a href="trirnd.html" class="text-decoration-none font-monospace"><small>trirnd</small></a></li>
+					<li><a href="unidcdf.html" class="text-decoration-none font-monospace"><small>unidcdf</small></a></li>
+					<li><a href="unidinv.html" class="text-decoration-none font-monospace"><small>unidinv</small></a></li>
+					<li><a href="unidpdf.html" class="text-decoration-none font-monospace"><small>unidpdf</small></a></li>
+					<li><a href="unidrnd.html" class="text-decoration-none font-monospace"><small>unidrnd</small></a></li>
+					<li><a href="unifcdf.html" class="text-decoration-none font-monospace"><small>unifcdf</small></a></li>
+					<li><a href="unifinv.html" class="text-decoration-none font-monospace"><small>unifinv</small></a></li>
+					<li><a href="unifpdf.html" class="text-decoration-none font-monospace"><small>unifpdf</small></a></li>
+					<li><a href="unifrnd.html" class="text-decoration-none font-monospace"><small>unifrnd</small></a></li>
+					<li><a href="vmcdf.html" class="text-decoration-none font-monospace"><small>vmcdf</small></a></li>
+					<li><a href="vminv.html" class="text-decoration-none font-monospace"><small>vminv</small></a></li>
+					<li><a href="vmpdf.html" class="text-decoration-none font-monospace"><small>vmpdf</small></a></li>
+					<li><a href="vmrnd.html" class="text-decoration-none font-monospace"><small>vmrnd</small></a></li>
+					<li><a href="wblcdf.html" class="text-decoration-none font-monospace"><small>wblcdf</small></a></li>
+					<li><a href="wblinv.html" class="text-decoration-none font-monospace"><small>wblinv</small></a></li>
+					<li><a href="wblpdf.html" class="text-decoration-none font-monospace"><small>wblpdf</small></a></li>
+					<li><a href="wblrnd.html" class="text-decoration-none font-monospace"><small>wblrnd</small></a></li>
+					<li><a href="wienrnd.html" class="text-decoration-none font-monospace"><small>wienrnd</small></a></li>
+					<li><a href="wishpdf.html" class="text-decoration-none font-monospace"><small>wishpdf</small></a></li>
+					<li><a href="wishrnd.html" class="text-decoration-none font-monospace"><small>wishrnd</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList10" type="checkbox">
+				<label for="togList10">
+					<span><h6>Distribution Statistics</h6></span>
+					<span><h6>Distribution Statistics</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="betastat.html" class="text-decoration-none font-monospace"><small>betastat</small></a></li>
+					<li><a href="binostat.html" class="text-decoration-none font-monospace"><small>binostat</small></a></li>
+					<li><a href="bisastat.html" class="text-decoration-none font-monospace"><small>bisastat</small></a></li>
+					<li><a href="burrstat.html" class="text-decoration-none font-monospace"><small>burrstat</small></a></li>
+					<li><a href="chi2stat.html" class="text-decoration-none font-monospace"><small>chi2stat</small></a></li>
+					<li><a href="evstat.html" class="text-decoration-none font-monospace"><small>evstat</small></a></li>
+					<li><a href="expstat.html" class="text-decoration-none font-monospace"><small>expstat</small></a></li>
+					<li><a href="fstat.html" class="text-decoration-none font-monospace"><small>fstat</small></a></li>
+					<li><a href="gamstat.html" class="text-decoration-none font-monospace"><small>gamstat</small></a></li>
+					<li><a href="geostat.html" class="text-decoration-none font-monospace"><small>geostat</small></a></li>
+					<li><a href="gevstat.html" class="text-decoration-none font-monospace"><small>gevstat</small></a></li>
+					<li><a href="gpstat.html" class="text-decoration-none font-monospace"><small>gpstat</small></a></li>
+					<li><a href="hnstat.html" class="text-decoration-none font-monospace"><small>hnstat</small></a></li>
+					<li><a href="hygestat.html" class="text-decoration-none font-monospace"><small>hygestat</small></a></li>
+					<li><a href="invgstat.html" class="text-decoration-none font-monospace"><small>invgstat</small></a></li>
+					<li><a href="logistat.html" class="text-decoration-none font-monospace"><small>logistat</small></a></li>
+					<li><a href="loglstat.html" class="text-decoration-none font-monospace"><small>loglstat</small></a></li>
+					<li><a href="lognstat.html" class="text-decoration-none font-monospace"><small>lognstat</small></a></li>
+					<li><a href="nakastat.html" class="text-decoration-none font-monospace"><small>nakastat</small></a></li>
+					<li><a href="nbinstat.html" class="text-decoration-none font-monospace"><small>nbinstat</small></a></li>
+					<li><a href="ncfstat.html" class="text-decoration-none font-monospace"><small>ncfstat</small></a></li>
+					<li><a href="nctstat.html" class="text-decoration-none font-monospace"><small>nctstat</small></a></li>
+					<li><a href="ncx2stat.html" class="text-decoration-none font-monospace"><small>ncx2stat</small></a></li>
+					<li><a href="normstat.html" class="text-decoration-none font-monospace"><small>normstat</small></a></li>
+					<li><a href="plstat.html" class="text-decoration-none font-monospace"><small>plstat</small></a></li>
+					<li><a href="poisstat.html" class="text-decoration-none font-monospace"><small>poisstat</small></a></li>
+					<li><a href="raylstat.html" class="text-decoration-none font-monospace"><small>raylstat</small></a></li>
+					<li><a href="ricestat.html" class="text-decoration-none font-monospace"><small>ricestat</small></a></li>
+					<li><a href="tlsstat.html" class="text-decoration-none font-monospace"><small>tlsstat</small></a></li>
+					<li><a href="tristat.html" class="text-decoration-none font-monospace"><small>tristat</small></a></li>
+					<li><a href="tstat.html" class="text-decoration-none font-monospace"><small>tstat</small></a></li>
+					<li><a href="unidstat.html" class="text-decoration-none font-monospace"><small>unidstat</small></a></li>
+					<li><a href="unifstat.html" class="text-decoration-none font-monospace"><small>unifstat</small></a></li>
+					<li><a href="wblstat.html" class="text-decoration-none font-monospace"><small>wblstat</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList11" type="checkbox">
+				<label for="togList11">
+					<span><h6>Distribution Wrappers</h6></span>
+					<span><h6>Distribution Wrappers</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="cdf.html" class="text-decoration-none font-monospace"><small>cdf</small></a></li>
+					<li><a href="fitdist.html" class="text-decoration-none font-monospace"><small>fitdist</small></a></li>
+					<li><a href="icdf.html" class="text-decoration-none font-monospace"><small>icdf</small></a></li>
+					<li><a href="makedist.html" class="text-decoration-none font-monospace"><small>makedist</small></a></li>
+					<li><a href="mle.html" class="text-decoration-none font-monospace"><small>mle</small></a></li>
+					<li><a href="pdf.html" class="text-decoration-none font-monospace"><small>pdf</small></a></li>
+					<li><a href="random.html" class="text-decoration-none font-monospace"><small>random</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList12" type="checkbox">
+				<label for="togList12">
+					<span><h6>Experimental Design</h6></span>
+					<span><h6>Experimental Design</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="fullfact.html" class="text-decoration-none font-monospace"><small>fullfact</small></a></li>
+					<li><a href="ff2n.html" class="text-decoration-none font-monospace"><small>ff2n</small></a></li>
+					<li><a href="sigma_pts.html" class="text-decoration-none font-monospace"><small>sigma_pts</small></a></li>
+					<li><a href="x2fx.html" class="text-decoration-none font-monospace"><small>x2fx</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList13" type="checkbox" checked>
+				<label for="togList13">
+					<span><h6>Hypothesis Testing</h6></span>
+					<span><h6>Hypothesis Testing</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="adtest.html" class="text-decoration-none font-monospace"><small>adtest</small></a></li>
+					<li><a href="anova1.html" class="text-decoration-none font-monospace"><small>anova1</small></a></li>
+					<li><a href="anova2.html" class="text-decoration-none font-monospace"><small>anova2</small></a></li>
+					<li><a href="anovan.html" class="text-decoration-none font-monospace"><small>anovan</small></a></li>
+					<li><a href="bartlett_test.html" class="text-decoration-none font-monospace"><small>bartlett_test</small></a></li>
+					<li><a href="barttest.html" class="text-decoration-none font-monospace"><small>barttest</small></a></li>
+					<li><a href="binotest.html" class="text-decoration-none font-monospace"><small>binotest</small></a></li>
+					<li><a href="chi2gof.html" class="text-decoration-none font-monospace"><small>chi2gof</small></a></li>
+					<li><a href="chi2test.html" class="text-decoration-none font-monospace"><small>chi2test</small></a></li>
+					<li><a href="correlation_test.html" class="text-decoration-none font-monospace"><small>correlation_test</small></a></li>
+					<li><a href="fishertest.html" class="text-decoration-none font-monospace"><small>fishertest</small></a></li>
+					<li><a href="friedman.html" class="text-decoration-none font-monospace"><small>friedman</small></a></li>
+					<li><a href="hotelling_t2test.html" class="text-decoration-none font-monospace"><small>hotelling_t2test</small></a></li>
+					<li><a href="hotelling_t2test2.html" class="text-decoration-none font-monospace"><small>hotelling_t2test2</small></a></li>
+					<li><a href="kruskalwallis.html" class="text-decoration-none font-monospace"><small>kruskalwallis</small></a></li>
+					<li><a href="kstest.html" class="text-decoration-none font-monospace"><small>kstest</small></a></li>
+					<li><a href="kstest2.html" class="text-decoration-none font-monospace"><small>kstest2</small></a></li>
+					<li><a href="levene_test.html" class="text-decoration-none font-monospace"><small>levene_test</small></a></li>
+					<li><a href="manova1.html" class="text-decoration-none font-monospace"><small>manova1</small></a></li>
+					<li><a href="mcnemar_test.html" class="text-decoration-none font-monospace"><small>mcnemar_test</small></a></li>
+					<li><a href="multcompare.html" class="text-decoration-none font-monospace fw-bolder"><small>multcompare</small></a></li>
+					<li><a href="ranksum.html" class="text-decoration-none font-monospace"><small>ranksum</small></a></li>
+					<li><a href="regression_ftest.html" class="text-decoration-none font-monospace"><small>regression_ftest</small></a></li>
+					<li><a href="regression_ttest.html" class="text-decoration-none font-monospace"><small>regression_ttest</small></a></li>
+					<li><a href="runstest.html" class="text-decoration-none font-monospace"><small>runstest</small></a></li>
+					<li><a href="sampsizepwr.html" class="text-decoration-none font-monospace"><small>sampsizepwr</small></a></li>
+					<li><a href="signtest.html" class="text-decoration-none font-monospace"><small>signtest</small></a></li>
+					<li><a href="ttest.html" class="text-decoration-none font-monospace"><small>ttest</small></a></li>
+					<li><a href="ttest2.html" class="text-decoration-none font-monospace"><small>ttest2</small></a></li>
+					<li><a href="vartest.html" class="text-decoration-none font-monospace"><small>vartest</small></a></li>
+					<li><a href="vartest2.html" class="text-decoration-none font-monospace"><small>vartest2</small></a></li>
+					<li><a href="vartestn.html" class="text-decoration-none font-monospace"><small>vartestn</small></a></li>
+					<li><a href="ztest.html" class="text-decoration-none font-monospace"><small>ztest</small></a></li>
+					<li><a href="ztest2.html" class="text-decoration-none font-monospace"><small>ztest2</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList14" type="checkbox">
+				<label for="togList14">
+					<span><h6>I/O</h6></span>
+					<span><h6>I/O</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="libsvmread.html" class="text-decoration-none font-monospace"><small>libsvmread</small></a></li>
+					<li><a href="libsvmwrite.html" class="text-decoration-none font-monospace"><small>libsvmwrite</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList15" type="checkbox">
+				<label for="togList15">
+					<span><h6>Machine Learning</h6></span>
+					<span><h6>Machine Learning</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="hmmestimate.html" class="text-decoration-none font-monospace"><small>hmmestimate</small></a></li>
+					<li><a href="hmmgenerate.html" class="text-decoration-none font-monospace"><small>hmmgenerate</small></a></li>
+					<li><a href="hmmviterbi.html" class="text-decoration-none font-monospace"><small>hmmviterbi</small></a></li>
+					<li><a href="svmpredict.html" class="text-decoration-none font-monospace"><small>svmpredict</small></a></li>
+					<li><a href="svmtrain.html" class="text-decoration-none font-monospace"><small>svmtrain</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList16" type="checkbox">
+				<label for="togList16">
+					<span><h6>Model Fitting</h6></span>
+					<span><h6>Model Fitting</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="fitcknn.html" class="text-decoration-none font-monospace"><small>fitcknn</small></a></li>
+					<li><a href="fitgmdist.html" class="text-decoration-none font-monospace"><small>fitgmdist</small></a></li>
+					<li><a href="fitlm.html" class="text-decoration-none font-monospace"><small>fitlm</small></a></li>
+					<li><a href="fitrgam.html" class="text-decoration-none font-monospace"><small>fitrgam</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList17" type="checkbox">
+				<label for="togList17">
+					<span><h6>Plotting</h6></span>
+					<span><h6>Plotting</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="boxplot.html" class="text-decoration-none font-monospace"><small>boxplot</small></a></li>
+					<li><a href="cdfplot.html" class="text-decoration-none font-monospace"><small>cdfplot</small></a></li>
+					<li><a href="confusionchart.html" class="text-decoration-none font-monospace"><small>confusionchart</small></a></li>
+					<li><a href="dendrogram.html" class="text-decoration-none font-monospace"><small>dendrogram</small></a></li>
+					<li><a href="ecdf.html" class="text-decoration-none font-monospace"><small>ecdf</small></a></li>
+					<li><a href="einstein.html" class="text-decoration-none font-monospace"><small>einstein</small></a></li>
+					<li><a href="gscatter.html" class="text-decoration-none font-monospace"><small>gscatter</small></a></li>
+					<li><a href="histfit.html" class="text-decoration-none font-monospace"><small>histfit</small></a></li>
+					<li><a href="hist3.html" class="text-decoration-none font-monospace"><small>hist3</small></a></li>
+					<li><a href="manovacluster.html" class="text-decoration-none font-monospace"><small>manovacluster</small></a></li>
+					<li><a href="normplot.html" class="text-decoration-none font-monospace"><small>normplot</small></a></li>
+					<li><a href="ppplot.html" class="text-decoration-none font-monospace"><small>ppplot</small></a></li>
+					<li><a href="qqplot.html" class="text-decoration-none font-monospace"><small>qqplot</small></a></li>
+					<li><a href="silhouette.html" class="text-decoration-none font-monospace"><small>silhouette</small></a></li>
+					<li><a href="violin.html" class="text-decoration-none font-monospace"><small>violin</small></a></li>
+					<li><a href="wblplot.html" class="text-decoration-none font-monospace"><small>wblplot</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList18" type="checkbox">
+				<label for="togList18">
+					<span><h6>Regression</h6></span>
+					<span><h6>Regression</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="canoncorr.html" class="text-decoration-none font-monospace"><small>canoncorr</small></a></li>
+					<li><a href="cholcov.html" class="text-decoration-none font-monospace"><small>cholcov</small></a></li>
+					<li><a href="dcov.html" class="text-decoration-none font-monospace"><small>dcov</small></a></li>
+					<li><a href="glmfit.html" class="text-decoration-none font-monospace"><small>glmfit</small></a></li>
+					<li><a href="logistic_regression.html" class="text-decoration-none font-monospace"><small>logistic_regression</small></a></li>
+					<li><a href="mnrfit.html" class="text-decoration-none font-monospace"><small>mnrfit</small></a></li>
+					<li><a href="monotone_smooth.html" class="text-decoration-none font-monospace"><small>monotone_smooth</small></a></li>
+					<li><a href="pca.html" class="text-decoration-none font-monospace"><small>pca</small></a></li>
+					<li><a href="pcacov.html" class="text-decoration-none font-monospace"><small>pcacov</small></a></li>
+					<li><a href="pcares.html" class="text-decoration-none font-monospace"><small>pcares</small></a></li>
+					<li><a href="plsregress.html" class="text-decoration-none font-monospace"><small>plsregress</small></a></li>
+					<li><a href="princomp.html" class="text-decoration-none font-monospace"><small>princomp</small></a></li>
+					<li><a href="regress.html" class="text-decoration-none font-monospace"><small>regress</small></a></li>
+					<li><a href="regress_gp.html" class="text-decoration-none font-monospace"><small>regress_gp</small></a></li>
+					<li><a href="ridge.html" class="text-decoration-none font-monospace"><small>ridge</small></a></li>
+					<li><a href="stepwisefit.html" class="text-decoration-none font-monospace"><small>stepwisefit</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList19" type="checkbox">
+				<label for="togList19">
+					<span><h6>Regression Classes</h6></span>
+					<span><h6>Regression Classes</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="RegressionGAM.html" class="text-decoration-none font-monospace"><small>RegressionGAM</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList20" type="checkbox">
+				<label for="togList20">
+					<span><h6>Transforms</h6></span>
+					<span><h6>Transforms</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="logit.html" class="text-decoration-none font-monospace"><small>logit</small></a></li>
+					<li><a href="probit.html" class="text-decoration-none font-monospace"><small>probit</small></a></li>
+				</ul>
+				</div>
+			</div>
+
+			  </div>
+			  <div class="col-md-10">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <h3 class="d-inline-block mr-2">
+                Function&nbsp;Reference: <b><code>multcompare</code></b>
+                </h3>
+              </div>
+            </div>
+            <div class="card-body">
+<dl>
+<dt><u>statistics:</u> <var>C</var> = <b>multcompare</b><i> (<var>STATS</var>)</i></dt>
+<dt><u>statistics:</u> <var>C</var> = <b>multcompare</b><i> (<var>STATS</var>, &quot;name&quot;, <var>value</var>)</i></dt>
+<dt><u>statistics:</u> [<var>C</var>, <var>M</var>] = <b>multcompare</b><i> (...)</i></dt>
+<dt><u>statistics:</u> [<var>C</var>, <var>M</var>, <var>H</var>] = <b>multcompare</b><i> (...)</i></dt>
+<dt><u>statistics:</u> [<var>C</var>, <var>M</var>, <var>H</var>, <var>GNAMES</var>] = <b>multcompare</b><i> (...)</i></dt>
+<dt><u>statistics:</u> <var>padj</var> = <b>multcompare</b><i> (<var>p</var>)</i></dt>
+<dt><u>statistics:</u> <var>padj</var> = <b>multcompare</b><i> (<var>p</var>, &quot;ctype&quot;, <var>CTYPE</var>)</i></dt>
+</dl>
+
+<p> Perform posthoc multiple comparison tests or p-value adjustments to control
+ the family-wise error rate (FWER) or false discovery rate (FDR).
+</p>
+<div class="ms-5">
+<p> <code><var>C</var> = multcompare (<var>STATS</var>)</code> performs a multiple comparison
+ using a <var>STATS</var> structure that is obtained as output from any of
+ the following functions: anova1, anova2, anovan, kruskalwallis, and friedman.
+ The return value <var>C</var> is a matrix with one row per comparison and six
+ columns. Columns 1-2 are the indices of the two samples being compared.
+ Columns 3-5 are a lower bound, estimate, and upper bound for their
+ difference, where the bounds are for 95% confidence intervals. Column 6-8 are
+ the multiplicity adjusted p-values for each individual comparison, the test
+ statistic and the degrees of freedom.
+ All tests by multcompare are two-tailed.
+</p>
+<p> <code>multcompare</code> can take a number of optional parameters as name-value
+ pairs.
+</p>
+<p> <code>[&hellip;] = multcompare (<var>STATS</var>, &quot;alpha&quot;, <var>ALPHA</var>)</code>
+</p>
+ <ul>
+<li>
+ <var>ALPHA</var> sets the significance level of null hypothesis significance
+ tests to ALPHA, and the central coverage of two-sided confidence intervals to
+ 100*(1-<var>ALPHA</var>)%. (Default ALPHA is 0.05).
+ </li></ul>
+
+<p> <code>[&hellip;] = multcompare (<var>STATS</var>, &quot;ControlGroup&quot;, <var>REF</var>)</code>
+</p>
+ <ul>
+<li>
+ <var>REF</var> is the index of the control group to limit comparisons to. The
+ index must be a positive integer scalar value. For each dimension (d) listed
+ in <var>DIM</var>, multcompare uses STATS.grpnames{d}(idx) as the control group.
+ (Default is empty, i.e. [], for full pairwise comparisons)
+ </li></ul>
+
+<p> <code>[&hellip;] = multcompare (<var>STATS</var>, &quot;ctype&quot;, <var>CTYPE</var>)</code>
+</p>
+ <ul>
+<li>
+ <var>CTYPE</var> is the type of comparison test to use. In order of increasing
+ power, the choices are: &quot;bonferroni&quot;, &quot;scheffe&quot;, &quot;mvt&quot;, &quot;holm&quot; (default),
+ &quot;hochberg&quot;, &quot;fdr&quot;, or &quot;lsd&quot;. The first five methods control the family-wise
+ error rate.  The &quot;fdr&quot; method controls false discovery rate (by the original
+ Benjamini-Hochberg step-up procedure). The final method, &quot;lsd&quot; (or &quot;none&quot;),
+ makes no attempt to control the Type 1 error rate of multiple comparisons.
+ The coverage of confidence intervals are only corrected for multiple
+ comparisons in the cases where <var>CTYPE</var> is &quot;bonferroni&quot;, &quot;scheffe&quot; or
+ &quot;mvt&quot;, which control the Type 1 error rate for simultaneous inference.
+
+<p> The &quot;mvt&quot; method uses the multivariate t distribution to assess the
+ probability or critical value of the maximum statistic across the tests,
+ thereby accounting for correlations among comparisons in the control of the
+ family-wise error rate with simultaneous inference.  In the case of pairwise
+ comparisons, it simulates Tukey&rsquo;s (or the Games-Howell) test, in the case of
+ comparisons with a single control group, it simulates Dunnett&rsquo;s test.
+ <var>CTYPE</var> values &quot;tukey-kramer&quot; and &quot;hsd&quot; are recognised but set the value
+ of <var>CTYPE</var> and <var>REF</var> to &quot;mvt&quot; and empty respectively.  A <var>CTYPE</var>
+ value &quot;dunnett&quot; is recognised but sets the value of <var>CTYPE</var> to &quot;mvt&quot;, and
+ if <var>REF</var> is empty, sets <var>REF</var> to 1.  Since the algorithm uses a Monte
+ Carlo method (of 1e+06 random samples), you can expect the results to
+ fluctuate slightly with each call to multcompare and the calculations may be
+ slow to complete for a large number of comparisons.  If the parallel package
+ is installed and loaded, <code>multcompare</code> will automatically accelerate
+ computations by parallel processing.  Note that p-values calculated by the
+ &quot;mvt&quot; are truncated at 1e-06.
+ </p></li></ul>
+
+<p> <code>[&hellip;] = multcompare (<var>STATS</var>, &quot;df&quot;, <var>DF</var>)</code>
+</p>
+ <ul>
+<li>
+ <var>DF</var> is an optional scalar value to set the number of degrees of freedom
+ in the calculation of p-values for the multiple comparison tests. By default,
+ this value is extracted from the <var>STATS</var> structure of the ANOVA test, but
+ setting <var>DF</var> maybe necessary to approximate Satterthwaite correction if
+ <code>anovan</code> was performed using weights.
+ </li></ul>
+
+<p> <code>[&hellip;] = multcompare (<var>STATS</var>, &quot;dim&quot;, <var>DIM</var>)</code>
+</p>
+ <ul>
+<li>
+ <var>DIM</var> is a vector specifying the dimension or dimensions over which the
+ estimated marginal means are to be calculated. Used only if STATS comes from
+ anovan. The value [1 3], for example, computes the estimated marginal mean
+ for each combination of the first and third predictor values. The default is
+ to compute over the first dimension (i.e. 1). If the specified dimension is,
+ or includes, a continuous factor then <code>multcompare</code> will return an
+ error.
+ </li></ul>
+
+<p> <code>[&hellip;] = multcompare (<var>STATS</var>, &quot;estimate&quot;, <var>ESTIMATE</var>)</code>
+</p>
+ <ul>
+<li>
+ <var>ESTIMATE</var> is a string specifying the estimates to be compared when
+ computing multiple comparisons after anova2; this argument is ignored by
+ anovan and anova1. Accepted values for <var>ESTIMATE</var> are either &quot;column&quot;
+ (default) to compare column means, or &quot;row&quot; to compare row means. If the
+ model type in anova2 was &quot;linear&quot; or &quot;nested&quot; then only &quot;column&quot; is accepted
+ for <var>ESTIMATE</var> since the row factor is assumed to be a random effect.
+ </li></ul>
+
+<p> <code>[&hellip;] = multcompare (<var>STATS</var>, &quot;display&quot;, <var>DISPLAY</var>)</code>
+</p>
+ <ul>
+<li>
+ <var>DISPLAY</var> is either &quot;on&quot; (the default): to display a table and graph of
+ the comparisons (e.g. difference between means), their 100*(1-<var>ALPHA</var>)%
+ intervals and multiplicity adjusted p-values in APA style; or &quot;off&quot;: to omit
+ the table and graph. On the graph, markers and error bars colored red have
+ multiplicity adjusted p-values &lt; ALPHA, otherwise the markers and error bars
+ are blue.
+ </li></ul>
+
+<p> <code>[&hellip;] = multcompare (<var>STATS</var>, &quot;seed&quot;, <var>SEED</var>)</code>
+</p>
+ <ul>
+<li>
+ <var>SEED</var> is a scalar value used to initialize the random number generator
+ so that <var>CTYPE</var> &quot;mvt&quot; produces reproducible results.
+ </li></ul>
+
+<p> <code>[<var>C</var>, <var>M</var>, <var>H</var>, <var>GNAMES</var>] = multcompare (&hellip;)</code>
+ returns additional outputs. <var>M</var> is a matrix where columns 1-2 are the
+ estimated marginal means and their standard errors, and columns 3-4 are lower
+ and upper bounds of the confidence intervals for the means; the critical
+ value of the test statistic is scaled by a factor of 2^(-0.5) before
+ multiplying by the standard errors of the group means so that the intervals
+ overlap when the difference in means becomes significant at approximately
+ the level <var>ALPHA</var>. When <var>ALPHA</var> is 0.05, this corresponds to
+ confidence intervals with 83.4% central coverage.  <var>H</var> is a handle to the
+ figure containing the graph.  <var>GNAMES</var> is a cell array with one row for
+ each group, containing the names of the groups.
+</p>
+<p> <code><var>padj</var> = multcompare (<var>p</var>)</code> calculates and returns adjusted
+ p-values (<var>padj</var>) using the Holm-step down Bonferroni procedure to
+ control the family-wise error rate.
+</p>
+<p> <code><var>padj</var> = multcompare (<var>p</var>, &quot;ctype&quot;, <var>CTYPE</var>)</code> calculates
+ and returns adjusted p-values (<var>padj</var>) computed using the method
+ <var>CTYPE</var>. In order of increasing power, <var>CTYPE</var> for p-value adjustment
+ can be either &quot;bonferroni&quot;, &quot;holm&quot; (default), &quot;hochberg&quot;, or &quot;fdr&quot;. See
+ above for further information about the <var>CTYPE</var> methods.
+</p>
+<p> <strong>See also: </strong>
+  <a href="anova1.html">anova1</a>, 
+  <a href="anova2.html">anova2</a>, 
+  <a href="anovan.html">anovan</a>, 
+  <a href="kruskalwallis.html">kruskalwallis</a>, 
+  <a href="friedman.html">friedman</a>, 
+  <a href="fitlm.html">fitlm</a>
+</p>
+<p><strong>Source Code: </strong>
+  <a href="https://github.com/gnu-octave/statistics/tree/main/inst/multcompare.m">multcompare</a>
+</div>
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 1
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+
+ ## Demonstration using balanced one-way ANOVA from anova1
+
+ x = ones (50, 4) .* [-2, 0, 1, 5];
+ randn ("seed", 1);    # for reproducibility
+ x = x + normrnd (0, 2, 50, 4);
+ groups = {"A", "B", "C", "D"};
+ [p, tbl, stats] = anova1 (x, groups, "off");
+ multcompare (stats);
+
+
+        HOLM Multiple Comparison (Post Hoc) Test for ANOVA1
+
+Group ID  Group ID   LBoundDiff   EstimatedDiff   UBoundDiff   p-value
+----------------------------------------------------------------------
+    1         2         -2.789        -2.009         -1.228      <.001
+    1         3         -2.489        -1.709         -0.928      <.001
+    1         4         -7.365        -6.585         -5.804      <.001
+    2         3         -0.480         0.300          1.081       .449
+    2         4         -5.356        -4.576         -3.795      <.001
+    3         4         -5.656        -4.876         -4.095      <.001
+
+                    </pre></td></tr></tbody>
+                  </table>
+                  <div class="text-center">
+                    <img src="assets/multcompare_101.png" class="rounded img-thumbnail" alt="plotted figure">
+                  </div><p></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 2
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+
+ ## Demonstration using unbalanced one-way ANOVA example from anovan
+
+ dv =  [ 8.706 10.362 11.552  6.941 10.983 10.092  6.421 14.943 15.931 ...
+        22.968 18.590 16.567 15.944 21.637 14.492 17.965 18.851 22.891 ...
+        22.028 16.884 17.252 18.325 25.435 19.141 21.238 22.196 18.038 ...
+        22.628 31.163 26.053 24.419 32.145 28.966 30.207 29.142 33.212 ...
+        25.694 ]';
+ g = [1 1 1 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3 3 3 3 ...
+      4 4 4 4 4 4 4 5 5 5 5 5 5 5 5 5]';
+
+ [P,ATAB, STATS] = anovan (dv, g, "varnames", "score", "display", "off");
+
+ [C, M, H, GNAMES] = multcompare (STATS, "dim", 1, "ctype", "holm", ...
+                                  "ControlGroup", 1, "display", "on")
+
+
+
+        HOLM Multiple Comparison (Post Hoc) Test for ANOVAN
+
+Group ID  Group ID   LBoundDiff   EstimatedDiff   UBoundDiff   p-value
+----------------------------------------------------------------------
+    1         2        -11.343        -8.000         -4.657      <.001
+    1         3        -11.932        -9.000         -6.068      <.001
+    1         4        -14.035       -11.000         -7.965      <.001
+    1         5        -21.849       -19.000        -16.151      <.001
+
+C =
+
+   1.0000e+00   2.0000e+00  -1.1343e+01  -8.0000e+00  -4.6572e+00   2.8581e-05  -4.8748e+00   3.2000e+01
+   1.0000e+00   3.0000e+00  -1.1932e+01  -9.0000e+00  -6.0682e+00   1.0459e-06  -6.2529e+00   3.2000e+01
+   1.0000e+00   4.0000e+00  -1.4035e+01  -1.1000e+01  -7.9654e+00   6.3838e-08  -7.3834e+00   3.2000e+01
+   1.0000e+00   5.0000e+00  -2.1849e+01  -1.9000e+01  -1.6151e+01   3.1974e-14  -1.3583e+01   3.2000e+01
+
+M =
+
+   10.0000    1.0178    8.5341   11.4659
+   18.0000    1.2874   16.1458   19.8542
+   19.0000    1.0178   17.5341   20.4659
+   21.0001    1.0880   19.4330   22.5673
+   29.0001    0.9595   27.6180   30.3822
+
+H = 1
+GNAMES =
+{
+  [1,1] = score=1
+  [2,1] = score=2
+  [3,1] = score=3
+  [4,1] = score=4
+  [5,1] = score=5
+}
+
+                    </pre></td></tr></tbody>
+                  </table>
+                  <div class="text-center">
+                    <img src="assets/multcompare_201.png" class="rounded img-thumbnail" alt="plotted figure">
+                  </div><p></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 3
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+
+ ## Demonstration using factorial ANCOVA example from anovan
+
+ score = [95.6 82.2 97.2 96.4 81.4 83.6 89.4 83.8 83.3 85.7 ...
+ 97.2 78.2 78.9 91.8 86.9 84.1 88.6 89.8 87.3 85.4 ...
+ 81.8 65.8 68.1 70.0 69.9 75.1 72.3 70.9 71.5 72.5 ...
+ 84.9 96.1 94.6 82.5 90.7 87.0 86.8 93.3 87.6 92.4 ...
+ 100. 80.5 92.9 84.0 88.4 91.1 85.7 91.3 92.3 87.9 ...
+ 91.7 88.6 75.8 75.7 75.3 82.4 80.1 86.0 81.8 82.5]';
+ treatment = {"yes" "yes" "yes" "yes" "yes" "yes" "yes" "yes" "yes" "yes" ...
+              "yes" "yes" "yes" "yes" "yes" "yes" "yes" "yes" "yes" "yes" ...
+              "yes" "yes" "yes" "yes" "yes" "yes" "yes" "yes" "yes" "yes" ...
+              "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  ...
+              "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  ...
+              "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"}';
+ exercise = {"lo"  "lo"  "lo"  "lo"  "lo"  "lo"  "lo"  "lo"  "lo"  "lo"  ...
+             "mid" "mid" "mid" "mid" "mid" "mid" "mid" "mid" "mid" "mid" ...
+             "hi"  "hi"  "hi"  "hi"  "hi"  "hi"  "hi"  "hi"  "hi"  "hi"  ...
+             "lo"  "lo"  "lo"  "lo"  "lo"  "lo"  "lo"  "lo"  "lo"  "lo"  ...
+             "mid" "mid" "mid" "mid" "mid" "mid" "mid" "mid" "mid" "mid" ...
+             "hi"  "hi"  "hi"  "hi"  "hi"  "hi"  "hi"  "hi"  "hi"  "hi"}';
+ age = [59 65 70 66 61 65 57 61 58 55 62 61 60 59 55 57 60 63 62 57 ...
+ 58 56 57 59 59 60 55 53 55 58 68 62 61 54 59 63 60 67 60 67 ...
+ 75 54 57 62 65 60 58 61 65 57 56 58 58 58 52 53 60 62 61 61]';
+
+ [P, ATAB, STATS] = anovan (score, {treatment, exercise, age}, "model", ...
+                            [1 0 0; 0 1 0; 0 0 1; 1 1 0], "continuous", 3, ...
+                            "sstype", "h", "display", "off", "contrasts", ...
+                            {"simple","poly",""});
+
+ [C, M, H, GNAMES] = multcompare (STATS, "dim", [1 2], "ctype", "holm", ...
+                                  "display", "on")
+
+
+
+        HOLM Multiple Comparison (Post Hoc) Test for ANOVAN
+
+Group ID  Group ID   LBoundDiff   EstimatedDiff   UBoundDiff   p-value
+----------------------------------------------------------------------
+    1         2         -4.544        -0.017          4.509      1.000
+    1         3          8.963        13.703         18.443      <.001
+    1         4         -6.002        -1.529          2.945      1.000
+    1         5         -6.174        -1.701          2.771      1.000
+    1         6         -0.692         3.957          8.605       .662
+    2         3          9.166        13.721         18.276      <.001
+    2         4         -6.060        -1.511          3.038      1.000
+    2         5         -6.195        -1.684          2.828      1.000
+    2         6         -0.533         3.974          8.481       .662
+    3         4        -20.018       -15.232        -10.446      <.001
+    3         5        -20.112       -15.404        -10.697      <.001
+    3         6        -14.228        -9.747         -5.265      <.001
+    4         5         -4.650        -0.172          4.305      1.000
+    4         6          0.798         5.485         10.172       .204
+    5         6          1.035         5.658         10.280       .174
+
+C =
+
+   1.0000e+00   2.0000e+00  -4.5437e+00  -1.7457e-02   4.5087e+00   1.0000e+00  -7.7360e-03   5.3000e+01
+   1.0000e+00   3.0000e+00   8.9634e+00   1.3703e+01   1.8443e+01   4.5333e-06   5.7988e+00   5.3000e+01
+   1.0000e+00   4.0000e+00  -6.0019e+00  -1.5286e+00   2.9447e+00   1.0000e+00  -6.8538e-01   5.3000e+01
+   1.0000e+00   5.0000e+00  -6.1735e+00  -1.7011e+00   2.7714e+00   1.0000e+00  -7.6287e-01   5.3000e+01
+   1.0000e+00   6.0000e+00  -6.9212e-01   3.9565e+00   8.6051e+00   6.6201e-01   1.7071e+00   5.3000e+01
+   2.0000e+00   3.0000e+00   9.1656e+00   1.3721e+01   1.8276e+01   2.0212e-06   6.0416e+00   5.3000e+01
+   2.0000e+00   4.0000e+00  -6.0600e+00  -1.5111e+00   3.0378e+00   1.0000e+00  -6.6630e-01   5.3000e+01
+   2.0000e+00   5.0000e+00  -6.1953e+00  -1.6836e+00   2.8281e+00   1.0000e+00  -7.4847e-01   5.3000e+01
+   2.0000e+00   6.0000e+00  -5.3340e-01   3.9740e+00   8.4813e+00   6.6201e-01   1.7684e+00   5.3000e+01
+   3.0000e+00   4.0000e+00  -2.0018e+01  -1.5232e+01  -1.0446e+01   6.1827e-07  -6.3835e+00   5.3000e+01
+   3.0000e+00   5.0000e+00  -2.0112e+01  -1.5404e+01  -1.0697e+01   3.4083e-07  -6.5634e+00   5.3000e+01
+   3.0000e+00   6.0000e+00  -1.4228e+01  -9.7468e+00  -5.2654e+00   6.5704e-04  -4.3623e+00   5.3000e+01
+   4.0000e+00   5.0000e+00  -4.6499e+00  -1.7249e-01   4.3050e+00   1.0000e+00  -7.7268e-02   5.3000e+01
+   4.0000e+00   6.0000e+00   7.9808e-01   5.4851e+00   1.0172e+01   2.0411e-01   2.3473e+00   5.3000e+01
+   5.0000e+00   6.0000e+00   1.0354e+00   5.6576e+00   1.0280e+01   1.7402e-01   2.4550e+00   5.3000e+01
+
+M =
+
+   86.9788    1.6031   84.7051   89.2525
+   86.9962    1.5774   84.7590   89.2334
+   73.2755    1.6514   70.9334   75.6176
+   88.5074    1.6166   86.2146   90.8002
+   88.6799    1.5948   86.4180   90.9417
+   83.0223    1.6130   80.7346   85.3100
+
+H = 1
+GNAMES =
+{
+  [1,1] = X1=yes, X2=lo
+  [2,1] = X1=yes, X2=mid
+  [3,1] = X1=yes, X2=hi
+  [4,1] = X1=no, X2=lo
+  [5,1] = X1=no, X2=mid
+  [6,1] = X1=no, X2=hi
+}
+
+                    </pre></td></tr></tbody>
+                  </table>
+                  <div class="text-center">
+                    <img src="assets/multcompare_301.png" class="rounded img-thumbnail" alt="plotted figure">
+                  </div><p></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 4
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+
+ ## Demonstration using one-way ANOVA from anovan, with fit by weighted least
+ ## squares to account for heteroskedasticity.
+
+ g = [1, 1, 1, 1, 1, 1, 1, 1, ...
+      2, 2, 2, 2, 2, 2, 2, 2, ...
+      3, 3, 3, 3, 3, 3, 3, 3]';
+
+ y = [13, 16, 16,  7, 11,  5,  1,  9, ...
+      10, 25, 66, 43, 47, 56,  6, 39, ...
+      11, 39, 26, 35, 25, 14, 24, 17]';
+
+ [P,ATAB,STATS] = anovan(y, g, "display", "off");
+ fitted = STATS.X * STATS.coeffs(:,1); # fitted values
+ b = polyfit (fitted, abs (STATS.resid), 1);
+ v = polyval (b, fitted);  # Variance as a function of the fitted values
+ [P,ATAB,STATS] = anovan (y, g, "weights", v.^-1, "display", "off");
+ [C, M] =  multcompare (STATS, "display", "on", "ctype", "mvt")
+
+
+        MVT Multiple Comparison (Post Hoc) Test for ANOVAN
+
+Group ID  Group ID   LBoundDiff   EstimatedDiff   UBoundDiff   p-value
+----------------------------------------------------------------------
+    1         2        -42.087       -26.750        -11.413      <.001
+    1         3        -26.797       -14.125         -1.453       .027
+    2         3         -5.228        12.625         30.478       .199
+
+C =
+
+   1.0000e+00   2.0000e+00  -4.2087e+01  -2.6750e+01  -1.1413e+01   7.2100e-04  -4.3716e+00   2.1000e+01
+   1.0000e+00   3.0000e+00  -2.6797e+01  -1.4125e+01  -1.4527e+00   2.7444e-02  -2.7937e+00   2.1000e+01
+   2.0000e+00   3.0000e+00  -5.2276e+00   1.2625e+01   3.0478e+01   1.9866e-01   1.7725e+00   2.1000e+01
+
+M =
+
+    9.7500    2.4770    5.3600   14.1400
+   36.5000    5.5953   26.5835   46.4165
+   23.8750    4.4076   16.0634   31.6866
+
+                    </pre></td></tr></tbody>
+                  </table>
+                  <div class="text-center">
+                    <img src="assets/multcompare_401.png" class="rounded img-thumbnail" alt="plotted figure">
+                  </div><p></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-4">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                  <h3 class="d-inline-block mr-2">
+                  Example: 5
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container bg-light">
+                <div class="row">
+                  <table><tbody><tr>
+                    <td>&nbsp;</td>
+                    <td><pre class="example">
+
+
+ ## Demonstration of p-value adjustments to control the false discovery rate
+ ## Data from Westfall (1997) JASA. 92(437):299-306
+
+ p = [.005708; .023544; .024193; .044895; ...
+       .048805; .221227; .395867; .693051; .775755];
+
+ padj = multcompare(p,'ctype','fdr')
+
+padj =
+
+   0.051372
+   0.072579
+   0.072579
+   0.087849
+   0.087849
+   0.331840
+   0.508972
+   0.775755
+   0.775755
+
+                    </pre></td></tr></tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
