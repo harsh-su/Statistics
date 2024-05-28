@@ -1406,13 +1406,15 @@ endclassdef
 %! obj = fitcknn (x, y, 'NumNeighbors', 5, 'Distance', 'mahalanobis', 'Cov', covMatrix);
 %!test
 %! CVMdl = crossval(obj);
-%! assert(class (CVMdl) , "ClassificationPartitionedModel") 
+%! assert(class (CVMdl) , "ClassificationPartitionedModel")
+%! assert (CVMdl.KFold, 10)
+%! assert (CVMdl.Partition, cvpartition (size (x, 1), 'KFold', 10))
 %! assert(CVMdl.ModelParameters.NumNeighbors == 5)
 %! assert(strcmp(CVMdl.ModelParameters.Distance, "mahalanobis"))
 %! assert(class(CVMdl.Trained{1}), "ClassificationKNN")
 %! assert(isequal(CVMdl.ModelParameters.DistParameter, obj.DistParameter))
 %! assert(CVMdl.ModelParameters.Standardize == obj.Standardize)
-##%! assert(strcmp(CVMdl.ModelParameters.DistanceWeight, obj.DistanceWeight))
+%! assert(strcmp(CVMdl.ModelParameters.DistanceWeight, obj.DistanceWeight))
 %! assert(strcmp(CVMdl.ModelParameters.NSMethod, obj.NSMethod))
 %!test
 %! CVMdl = crossval (obj);
